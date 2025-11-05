@@ -203,15 +203,15 @@ export default function Contact() {
                 </motion.h3>
 
                 {/* Email amélioré */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
-                  className="group flex items-start p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10 mb-4"
+                  className="group flex items-start p-4 sm:p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10 mb-4"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mr-5 group-hover:shadow-lg transition-all duration-300"
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-primary rounded-2xl flex items-center justify-center mr-3 sm:mr-5 flex-shrink-0 group-hover:shadow-lg transition-all duration-300"
                   >
-                    <Mail className="h-6 w-6 text-white" />
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                   </motion.div>
                   <div className="flex-1">
                     <p className="font-semibold text-foreground mb-2 text-lg">Email</p>
@@ -222,15 +222,15 @@ export default function Contact() {
                 </motion.div>
 
                 {/* Téléphone amélioré */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
-                  className="group flex items-start p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10 mb-4"
+                  className="group flex items-start p-4 sm:p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10 mb-4"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1, rotate: -5 }}
-                    className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center mr-5 group-hover:shadow-lg transition-all duration-300"
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-2xl flex items-center justify-center mr-3 sm:mr-5 flex-shrink-0 group-hover:shadow-lg transition-all duration-300"
                   >
-                    <Phone className="h-6 w-6 text-white" />
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                   </motion.div>
                   <div className="flex-1">
                     <p className="font-semibold text-foreground mb-2 text-lg">Téléphone</p>
@@ -241,15 +241,15 @@ export default function Contact() {
                 </motion.div>
 
                 {/* Horaires améliorés */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
-                  className="group flex items-start p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10"
+                  className="group flex items-start p-4 sm:p-6 rounded-2xl hover:bg-primary/10 transition-all duration-300 relative z-10"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-14 h-14 bg-yellow-500 rounded-2xl flex items-center justify-center mr-5 group-hover:shadow-lg transition-all duration-300"
+                    className="w-12 h-12 sm:w-14 sm:h-14 bg-yellow-500 rounded-2xl flex items-center justify-center mr-3 sm:mr-5 flex-shrink-0 group-hover:shadow-lg transition-all duration-300"
                   >
-                    <Clock className="h-6 w-6 text-white" />
+                    <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                   </motion.div>
                   <div className="flex-1">
                     <p className="font-semibold text-foreground mb-2 text-lg">Horaires</p>

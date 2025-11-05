@@ -38,18 +38,36 @@ export default function Contact() {
 
     try {
       setLoading(true);
+
       const res = await fetch(
-        "https://n8n.srv785651.hstgr.cloud/webhook/f09ac54c-5203-4f19-b8f2-6799f5758fd1",
+        "https://formspree.io/f/mpwovdyw",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ fullName, email, phone, subject, message }),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            name: fullName,
+            email: email,
+            phone: phone,
+            subject: subject,
+            message: message
+          }),
         }
       );
 
       if (!res.ok) throw new Error("Erreur lors de l'envoi");
 
       toast.success("Message envoyé. Nous vous répondrons sous 24h.");
+
+      // Réinitialiser le formulaire
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setSubject("");
+      setMessage("");
+
       navigate("/contact-confirmation");
     } catch (err) {
       toast.error("Impossible d'envoyer le message. Réessayez.");

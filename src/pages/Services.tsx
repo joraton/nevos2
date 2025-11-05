@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import BackgroundPaths from "@/components/BackgroundPaths";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   Globe,
   CalendarDays,
@@ -24,6 +25,8 @@ import {
 } from "lucide-react";
 
 export default function Services() {
+  const isMobile = useIsMobile(768);
+
   // Animation variants pour le fade-in
   const fadeInUp = {
     initial: { opacity: 0, y: 40 },
@@ -108,8 +111,8 @@ export default function Services() {
           />
         </div>
 
-        {/* Background Paths Animation */}
-        <BackgroundPaths position={1} />
+        {/* Background Paths Animation - Static on mobile */}
+        <BackgroundPaths position={1} isMobile={isMobile} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div

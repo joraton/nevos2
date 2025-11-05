@@ -12,7 +12,7 @@ interface AnimationConfig {
 
 /**
  * Returns optimized animation props based on device type
- * On mobile: simpler, faster animations with reduced motion
+ * On mobile: NO animations (static display)
  * On desktop: full animations
  */
 export const getOptimizedAnimation = (
@@ -23,32 +23,19 @@ export const getOptimizedAnimation = (
     return desktopConfig;
   }
 
-  // Mobile: simplified animations
-  const mobileConfig: AnimationConfig = {
-    ...desktopConfig,
-    transition: {
-      duration: 0.3, // Faster on mobile
-      ease: "easeOut",
-    },
+  // Mobile: NO animations - just show the element
+  return {
+    initial: undefined,
+    animate: undefined,
+    whileInView: undefined,
+    transition: undefined,
   };
-
-  // Remove complex transformations on mobile
-  if (desktopConfig.animate) {
-    const { scale, rotate, ...rest } = desktopConfig.animate;
-    mobileConfig.animate = rest;
-  }
-
-  if (desktopConfig.whileInView) {
-    const { scale, rotate, ...rest } = desktopConfig.whileInView;
-    mobileConfig.whileInView = rest;
-  }
-
-  return mobileConfig;
 };
 
 /**
  * Returns animation props for scroll-triggered animations
- * On mobile: reduces the number of animated properties
+ * On mobile: NO animations (static display)
+ * On desktop: full animations with slide
  */
 export const getScrollAnimation = (
   isMobile: boolean,
@@ -60,15 +47,12 @@ export const getScrollAnimation = (
   const { delay = 0, stagger = false } = options;
 
   if (isMobile) {
-    // Mobile: simple fade-in only
+    // Mobile: NO animations - just show the element
     return {
-      initial: { opacity: 0 },
-      whileInView: { opacity: 1 },
-      viewport: { once: true, margin: "-50px" },
-      transition: {
-        duration: 0.3,
-        delay: stagger ? delay * 0.05 : delay,
-      },
+      initial: undefined,
+      animate: undefined,
+      whileInView: undefined,
+      transition: undefined,
     };
   }
 
@@ -87,8 +71,14 @@ export const getScrollAnimation = (
 
 /**
  * Add will-change property for better performance on critical animations
+ * On mobile: NO will-change (can cause performance issues)
+ * On desktop: adds will-change for smooth animations
  */
-export const addWillChange = (properties: string[]): React.CSSProperties => {
+export const addWillChange = (isMobile: boolean, properties: string[]): React.CSSProperties => {
+  if (isMobile) {
+    return {};
+  }
+
   return {
     willChange: properties.join(", "),
   };

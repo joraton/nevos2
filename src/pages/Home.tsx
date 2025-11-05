@@ -5,7 +5,7 @@ import ShimmerButton from "@/components/ui/shimmer-button";
 // Highlighter retiré
 import { ServiceCard } from "@/components/ServiceCard";
 import Globe from "@/components/Globe";
-import { MobileGradient } from "@/components/MobileGradient";
+import { StaticGlobe } from "@/components/StaticGlobe";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Palette, Globe as GlobeIcon, CalendarDays, Truck, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -96,7 +96,7 @@ export default function Home() {
                 transition: { duration: 0.8 },
               })}
               className="relative z-10 text-center lg:text-left"
-              style={addWillChange(['opacity', 'transform'])}
+              style={addWillChange(isMobile, ['opacity', 'transform'])}
             >
               <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
                 Montrez vos <span className="animated-gradient-text">compétences</span> au monde
@@ -130,10 +130,10 @@ export default function Home() {
                 transition: { duration: 0.8, delay: 0.2 },
               })}
               className="relative z-10 flex justify-center"
-              style={addWillChange(['opacity', 'transform'])}
+              style={addWillChange(isMobile, ['opacity', 'transform'])}
             >
               {isMobile ? (
-                <MobileGradient
+                <StaticGlobe
                   size={globeSize}
                   className="drop-shadow-2xl"
                 />

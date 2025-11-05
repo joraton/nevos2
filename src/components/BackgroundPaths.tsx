@@ -86,8 +86,10 @@ const generateUniqueId = (prefix: string): string =>
 // Memoized FloatingPaths component
 const FloatingPaths = memo(function FloatingPaths({
     position,
+    isMobile = false,
 }: {
     position: number;
+    isMobile?: boolean;
 }) {
     // Increased number of paths while maintaining optimization
     const primaryPaths: PathData[] = useMemo(
@@ -153,100 +155,134 @@ const FloatingPaths = memo(function FloatingPaths({
                 </defs>
 
                 <g className="primary-waves">
-                    {primaryPaths.map((path) => (
-                        <motion.path
-                            key={path.id}
-                            d={path.d}
-                            stroke="url(#primaryGradient)"
-                            strokeWidth={path.width}
-                            strokeLinecap="round"
-                            animate={{
-                                y: [0, -120, 0],
-                                x: [0, 40, 0],
-                            }}
-                            transition={{
-                                y: {
-                                    duration: 12,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                                x: {
-                                    duration: 12,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
-                            style={{ opacity: path.opacity }}
-                        />
-                    ))}
+                    {primaryPaths.map((path) =>
+                        isMobile ? (
+                            <path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                style={{ opacity: path.opacity }}
+                            />
+                        ) : (
+                            <motion.path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                animate={{
+                                    y: [0, -120, 0],
+                                    x: [0, 40, 0],
+                                }}
+                                transition={{
+                                    y: {
+                                        duration: 12,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                    x: {
+                                        duration: 12,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                }}
+                                style={{ opacity: path.opacity }}
+                            />
+                        )
+                    )}
                 </g>
 
                 <g className="secondary-waves" style={{ opacity: 0.8 }}>
-                    {secondaryPaths.map((path) => (
-                        <motion.path
-                            key={path.id}
-                            d={path.d}
-                            stroke="url(#primaryGradient)"
-                            strokeWidth={path.width}
-                            strokeLinecap="round"
-                            animate={{
-                                y: [0, -80, 0],
-                                x: [0, 30, 0],
-                            }}
-                            transition={{
-                                y: {
-                                    duration: 10,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                                x: {
-                                    duration: 10,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
-                            style={{ opacity: path.opacity }}
-                        />
-                    ))}
+                    {secondaryPaths.map((path) =>
+                        isMobile ? (
+                            <path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                style={{ opacity: path.opacity }}
+                            />
+                        ) : (
+                            <motion.path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                animate={{
+                                    y: [0, -80, 0],
+                                    x: [0, 30, 0],
+                                }}
+                                transition={{
+                                    y: {
+                                        duration: 10,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                    x: {
+                                        duration: 10,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                }}
+                                style={{ opacity: path.opacity }}
+                            />
+                        )
+                    )}
                 </g>
 
                 <g className="accent-waves" style={{ opacity: 0.6 }}>
-                    {accentPaths.map((path) => (
-                        <motion.path
-                            key={path.id}
-                            d={path.d}
-                            stroke="url(#primaryGradient)"
-                            strokeWidth={path.width}
-                            strokeLinecap="round"
-                            animate={{
-                                y: [0, -40, 0],
-                                x: [0, 20, 0],
-                            }}
-                            transition={{
-                                y: {
-                                    duration: 8,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                                x: {
-                                    duration: 8,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    repeatType: "reverse",
-                                },
-                            }}
-                            style={{ opacity: path.opacity }}
-                        />
-                    ))}
+                    {accentPaths.map((path) =>
+                        isMobile ? (
+                            <path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                style={{ opacity: path.opacity }}
+                            />
+                        ) : (
+                            <motion.path
+                                key={path.id}
+                                d={path.d}
+                                stroke="url(#primaryGradient)"
+                                strokeWidth={path.width}
+                                strokeLinecap="round"
+                                animate={{
+                                    y: [0, -40, 0],
+                                    x: [0, 20, 0],
+                                }}
+                                transition={{
+                                    y: {
+                                        duration: 8,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                    x: {
+                                        duration: 8,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                        repeatType: "reverse",
+                                    },
+                                }}
+                                style={{ opacity: path.opacity }}
+                            />
+                        )
+                    )}
                 </g>
             </svg>
         </div>
     );
 });
 
-export default memo(FloatingPaths);
+const BackgroundPaths = memo(FloatingPaths);
+export default BackgroundPaths;

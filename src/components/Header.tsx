@@ -68,14 +68,15 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <ShimmerButton
-              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
-              className="text-lg"
-              background="oklch(0.2097 0.008 274.5332)"
-              shimmerColor="#ffffff"
-            >
-              Démarrer un projet →
-            </ShimmerButton>
+            <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <ShimmerButton
+                className="text-lg"
+                background="oklch(0.2097 0.008 274.5332)"
+                shimmerColor="#ffffff"
+              >
+                Démarrer un projet →
+              </ShimmerButton>
+            </Link>
           </div>
 
           {/* Mobile Menu Button (animated + accessible) */}
@@ -129,14 +130,19 @@ export const Header = () => {
                     {item.name}
                   </Link>
                 ))}
-                <ShimmerButton
-                  onClick={() => { setIsMobileMenuOpen(false); window.location.assign('/contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="text-lg mx-4 w-full min-h-[52px]"
-                  background="oklch(0.2097 0.008 274.5332)"
-                  shimmerColor="#ffffff"
+                <Link
+                  to="/contact"
+                  onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="mx-4"
                 >
-                  Démarrer un projet →
-                </ShimmerButton>
+                  <ShimmerButton
+                    className="text-lg w-full min-h-[52px]"
+                    background="oklch(0.2097 0.008 274.5332)"
+                    shimmerColor="#ffffff"
+                  >
+                    Démarrer un projet →
+                  </ShimmerButton>
+                </Link>
               </div>
             </motion.div>
           )}

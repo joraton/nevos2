@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ShimmerButton from "@/components/ui/shimmer-button";
@@ -57,14 +58,32 @@ const services = [
 // (Supprimé) Témoignages — non requis par accueil.md
 
 export default function Home() {
+  const [globeSize, setGlobeSize] = useState(500);
+
+  useEffect(() => {
+    const updateGlobeSize = () => {
+      if (window.innerWidth < 640) {
+        setGlobeSize(280);
+      } else if (window.innerWidth < 1024) {
+        setGlobeSize(380);
+      } else {
+        setGlobeSize(500);
+      }
+    };
+
+    updateGlobeSize();
+    window.addEventListener('resize', updateGlobeSize);
+    return () => window.removeEventListener('resize', updateGlobeSize);
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with Globe */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--background)] via-[var(--accent)] to-[var(--background)]">
         {/* Animated beams background behind content and planet */}
         <BackgroundBeams className="absolute inset-0 z-0 opacity-60" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Contenu texte */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -72,15 +91,15 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="relative z-10 text-center lg:text-left"
             >
-              <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
                 Montrez vos <span className="animated-gradient-text">compétences</span> au monde
               </h1>
 
-              <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-10 leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-foreground/80 max-w-2xl mb-8 sm:mb-10 leading-relaxed">
                 Restaurant, artisan, commerçant ? Nous concevons des sites web professionnels pour attirer plus de clients, valoriser votre savoir-faire et développer votre activité locale.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <ShimmerButton
                   onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
                   className="text-lg"
@@ -102,8 +121,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative z-10 flex justify-center"
             >
-             <Globe 
-                size={500}
+             <Globe
+                size={globeSize}
                 rotationSpeed={0.001}
                 className="drop-shadow-2xl"
               />
@@ -113,10 +132,10 @@ export default function Home() {
       </section>
 
       {/* Logo Loop Transition */}
-      <section className="py-12 bg-background">
+      <section className="py-8 sm:py-12 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground">technologies maitrisées</h3>
+          <div className="text-center mb-4 sm:mb-6">
+            <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground">technologies maitrisées</h3>
           </div>
         </div>
         {(() => {
@@ -147,18 +166,18 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Nos services
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               Des solutions web sur-mesure conçues pour les petites entreprises, optimisées pour l'expérience utilisateur, la performance et la conversion.
             </p>
           </motion.div>
@@ -172,7 +191,7 @@ export default function Home() {
       </section>
 
       {/* Prototype Gratuit */}
-      <section className="py-24 bg-gradient-to-br from-background via-card/30 to-background relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-gradient-to-br from-background via-card/30 to-background relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-16" />
         <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-primary/3 rounded-full blur-3xl" />
@@ -197,7 +216,7 @@ export default function Home() {
               {/* Glow effect subtil */}
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-3xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="relative bg-card/90 backdrop-blur-xl border border-border/40 rounded-3xl p-8 md:p-12 shadow-xl text-center">
+              <div className="relative bg-card/90 backdrop-blur-xl border border-border/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl text-center">
                 {/* Icône en haut */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -217,7 +236,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4, duration: 0.5 }}
-                  className="font-heading text-4xl md:text-5xl font-bold mb-6"
+                  className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
                 >
                   Prototype <span className="text-primary font-bold">Gratuit</span>
                 </motion.h2>
@@ -228,7 +247,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.5 }}
-                  className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
+                  className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2"
                 >
                   Nous réalisons <span className="font-semibold text-primary">gratuitement</span> un prototype de votre site web une fois que vous nous contactez pour une demande. Visualisez votre projet avant de vous engager !
                 </motion.p>
@@ -297,7 +316,7 @@ export default function Home() {
       </section>
 
       {/* CTA finale */}
-      <section className="py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -305,7 +324,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="mb-4 flex items-center justify-center gap-6">
+            <div className="mb-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <CheckCircle className="text-primary" size={18} />
                 <span>Livraison rapide</span>
@@ -316,10 +335,10 @@ export default function Home() {
               </div>
             </div>
 
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Transformez votre vision en <span className="animated-gradient-text">réalité digitale</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8 px-4">
               Rejoignez les entrepreneurs qui ont fait confiance à notre expertise pour <span className="font-semibold">propulser leur business en ligne</span>.
             </p>
 

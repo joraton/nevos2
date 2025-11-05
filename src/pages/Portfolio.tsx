@@ -5,6 +5,7 @@ import { ExternalLink } from "lucide-react";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
 import { BackgroundPathsHero } from "@/components/ui/background-paths-hero";
 import ShimmerButton from "@/components/ui/shimmer-button";
+import { Link } from "react-router-dom";
 
 const categories = ["Tous", "Restaurant", "Commerce"];
 
@@ -67,9 +68,9 @@ export default function Portfolio() {
       />
 
       {/* Filters */}
-      <section className="py-8 bg-card sticky top-20 z-40 border-b border-border">
+      <section className="py-6 sm:py-8 bg-card sticky top-20 z-40 border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category) => (
               <Button
                 key={category}
@@ -85,9 +86,9 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-16 bg-background">
+      <section className="py-12 sm:py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 key={`${project.title}-${idx}`}
@@ -168,7 +169,7 @@ export default function Portfolio() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-card">
+      <section className="py-16 sm:py-24 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -176,21 +177,22 @@ export default function Portfolio() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6">
               Votre Projet Sera Le Prochain
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
               Rejoignez nos clients satisfaits et donnez vie à votre vision digitale.
             </p>
-            <ShimmerButton
-              className="text-lg px-10 py-6 mx-auto mt-6 w-fit"
-              background="oklch(0.2097 0.008 274.5332)"
-              shimmerColor="#ffffff"
-              borderRadius="12px"
-              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
-            >
-              Démarrer un projet →
-            </ShimmerButton>
+            <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <ShimmerButton
+                className="text-base sm:text-lg px-8 sm:px-10 py-5 sm:py-6 mx-auto mt-4 sm:mt-6 w-fit"
+                background="oklch(0.2097 0.008 274.5332)"
+                shimmerColor="#ffffff"
+                borderRadius="12px"
+              >
+                Démarrer un projet →
+              </ShimmerButton>
+            </Link>
           </motion.div>
         </div>
       </section>

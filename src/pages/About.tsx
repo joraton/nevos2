@@ -9,13 +9,13 @@ export default function About() {
   return (
     <div className="min-h-screen pt-20">
       {/* Section Héros (refonte avec image) */}
-      <section className="relative py-24 bg-gradient-to-br from-[var(--background)] via-card/50 to-[var(--background)] space-bg">
+      <section className="relative py-16 sm:py-24 bg-gradient-to-br from-[var(--background)] via-card/50 to-[var(--background)] space-bg">
         {/* Arrière-plan spatial subtil */}
         <div className="space-stars" />
         <div className="space-nebula" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Bloc texte */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -26,10 +26,10 @@ export default function About() {
               <span className="inline-block mb-4 px-4 py-1 rounded-full border border-border text-xs tracking-wider uppercase text-muted-foreground">
                 Votre partenaire digital de confiance
               </span>
-              <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-6">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4 sm:mb-6">
                 À propos de Nevos
               </h1>
-              <p className="text-lg md:text-xl text-foreground/80 mb-8">
+              <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-8">
                 Nous créons des expériences web élégantes, performantes et accessibles, conçues pour accélérer la visibilité et la croissance de votre entreprise.
               </p>
               <div className="flex items-center gap-4">
@@ -66,7 +66,7 @@ export default function About() {
   </section>
 
       {/* Section Timeline */}
-      <section className="py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -75,7 +75,7 @@ export default function About() {
             className="text-center mb-12"
           >
             <span className="inline-block mb-3 px-3 py-1 rounded-full border border-border text-xs tracking-wider uppercase text-muted-foreground">Notre parcours</span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">Notre histoire</h2>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">Notre histoire</h2>
           </motion.div>
 
           <motion.div
@@ -91,7 +91,7 @@ export default function About() {
                     <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z" />
                   </svg>
                 </span>
-                <h3 className="flex items-center mb-1 font-heading text-xl md:text-2xl font-semibold text-foreground">
+                <h3 className="flex items-center mb-1 font-heading text-lg sm:text-xl md:text-2xl font-semibold text-foreground">
                   1. Le constat initial
                   <span className="ml-3 bg-primary/10 text-primary text-xs font-medium px-2.5 py-0.5 rounded-sm">Départ</span>
                 </h3>
@@ -106,7 +106,7 @@ export default function About() {
                     <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z" />
                   </svg>
                 </span>
-                <h3 className="mb-1 font-heading text-xl md:text-2xl font-semibold text-foreground">2. La solution Nevos</h3>
+                <h3 className="mb-1 font-heading text-lg sm:text-xl md:text-2xl font-semibold text-foreground">2. La solution Nevos</h3>
                 <p className="text-muted-foreground">
                   Chez Nevos, nous avons renversé le modèle traditionnel : proposer des sites vitrine au design soigné et aux performances irréprochables, accessibles via un abonnement mensuel tout compris. Pas de factures surprises, pas de compromis sur la qualité ; une solution claire, agile et évolutive.
                 </p>
@@ -118,7 +118,7 @@ export default function About() {
                     <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z" />
                   </svg>
                 </span>
-                <h3 className="mb-1 font-heading text-xl md:text-2xl font-semibold text-foreground">3. Notre mission</h3>
+                <h3 className="mb-1 font-heading text-lg sm:text-xl md:text-2xl font-semibold text-foreground">3. Notre mission</h3>
                 <p className="text-muted-foreground">
                   Offrir à chaque entreprise l’outil digital qui lui permet de gagner en visibilité, de séduire davantage de clients et d’accélérer sa croissance. Une exigence créative alliée à une tarification équitable, qui inspire chaque ligne de code.
                 </p>
@@ -141,15 +141,15 @@ export default function About() {
       
 
       {/* Section Nos Valeurs */}
-      <section className="py-24 bg-card">
+      <section className="py-16 sm:py-24 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="inline-block mb-3 px-3 py-1 rounded-full border border-border text-xs tracking-wider uppercase text-muted-foreground">Ce qui nous guide</span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-3">Nos valeurs</h2>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3">Nos valeurs</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Des principes fondamentaux qui guident chacune de nos actions et décisions</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Créativité */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <Card className="p-8 text-center h-full group">
@@ -187,7 +187,7 @@ export default function About() {
       </section>
 
       {/* Section CTA */}
-      <section className="py-24 bg-background relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-background relative overflow-hidden">
         {/* Arrière-plan spatial subtil */}
         <div className="space-stars" />
         <div className="space-nebula" />
@@ -195,8 +195,8 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-3xl mx-auto">
             <span className="inline-block mb-3 px-3 py-1 rounded-full border border-border text-xs tracking-wider uppercase text-muted-foreground">Prêt à démarrer ?</span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">Un projet digital en tête ?</h2>
-            <p className="text-lg text-muted-foreground mb-8">Dites-nous tout ! Notre équipe vous contacte le jour même pour discuter de votre projet.</p>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">Un projet digital en tête ?</h2>
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 px-4">Dites-nous tout ! Notre équipe vous contacte le jour même pour discuter de votre projet.</p>
             <Button asChild size="lg" className="text-lg px-10 py-6">
               <Link
                 to="/contact"

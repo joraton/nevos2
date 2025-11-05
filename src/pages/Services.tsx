@@ -49,7 +49,7 @@ export default function Services() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero */}
-      <section className="relative py-32 overflow-hidden bg-gradient-to-br from-background via-background to-accent/5">
+      <section className="relative py-20 sm:py-32 overflow-hidden bg-gradient-to-br from-background via-background to-accent/5">
         {/* Animated gradient blobs */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -127,7 +127,7 @@ export default function Services() {
               <span className="text-sm font-medium text-primary">Votre partenaire digital</span>
             </motion.div>
 
-            <h1 className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               Nos <span className="relative inline-block">
                 <span className="relative z-10">Services</span>
                 <motion.span
@@ -139,7 +139,7 @@ export default function Services() {
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
               Sites élégants, faciles à maintenir, pensés pour convertir — de l'idée au lancement, avec accompagnement continu.
             </p>
 
@@ -147,7 +147,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-10 flex flex-wrap items-center justify-center gap-4"
+              className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4"
             >
               {[
                 "Design sur‑mesure",
@@ -170,14 +170,14 @@ export default function Services() {
       </section>
 
       {/* Aperçu */}
-      <section className="relative py-20 bg-gradient-to-b from-card to-background">
+      <section className="relative py-16 sm:py-20 bg-gradient-to-b from-card to-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             {...fadeInUp}
             className="max-w-4xl mx-auto"
           >
-            <div className="glass-card p-10 md:p-12 rounded-3xl border-2 border-primary/20 shadow-xl">
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center">
+            <div className="glass-card p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border-2 border-primary/20 shadow-xl">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed text-center">
                 <span className="font-semibold text-foreground">Nevos</span> conçoit des sites vitrine modernes et efficaces pour petites entreprises et indépendants. Nous maîtrisons la mise en page, les animations, la clarté des messages, et nous privilégions la simplicité pour que ton site travaille pour toi. Et tu gardes la main grâce à un{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10 font-medium text-primary">espace d'administration facile</span>
@@ -190,7 +190,7 @@ export default function Services() {
       </section>
 
       {/* Bloc Services */}
-      <section className="relative py-24 bg-background overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-background overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,oklch(0.9317_0.0118_231.6594/0.1)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.9317_0.0118_231.6594/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -198,16 +198,16 @@ export default function Services() {
             {...fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Ce que nous proposons
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Des modules simples et utiles, centrés sur l'essentiel.
             </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             initial="initial"
             whileInView="whileInView"
             viewport={{ once: true, margin: "-100px" }}
@@ -315,7 +315,7 @@ export default function Services() {
       </section>
 
       {/* Compétences */}
-      <section className="relative py-24 bg-card overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-card overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,_oklch(0.6692_0.1607_245.0110/0.05),transparent_60%)]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -331,7 +331,7 @@ export default function Services() {
             </p>
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {[
               { title: "Design & UI", icon: Palette, bullets: ["Mise en page soignée", "Typographies lisibles", "Système de cartes", "Animations maîtrisées"] },
               { title: "UX & contenu", icon: FileText, bullets: ["Structure orientée conversion", "Titres clairs", "CTA efficaces", "Messages simples"] },
@@ -377,7 +377,7 @@ export default function Services() {
       </section>
 
       {/* Processus */}
-      <section className="relative py-24 bg-background overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-background overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-background to-background" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -393,7 +393,7 @@ export default function Services() {
             </p>
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {[
               { title: "1) Cadrage", desc: "Objectifs, audience, pages, ton, priorités.", icon: Target },
               { title: "2) Prototype rapide", desc: "Aperçu du style et de l'ergonomie pour validation.", icon: Sparkles },
@@ -439,7 +439,7 @@ export default function Services() {
       </section>
 
       {/* FAQ (Accordéon) */}
-      <section className="relative py-24 bg-card overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-card overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_oklch(0.6723_0.1606_244.9955/0.08),transparent_60%)]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -460,7 +460,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: easeOut }}
-            className="max-w-4xl mx-auto glass-card p-8 rounded-3xl border-2 border-border"
+            className="max-w-4xl mx-auto glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl border-2 border-border"
           >
             <Accordion type="single" collapsible className="space-y-4">
               {[
@@ -533,7 +533,7 @@ export default function Services() {
       </section>
 
       {/* Tarifs indicatifs */}
-      <section className="relative py-24 bg-gradient-to-b from-background via-accent/5 to-background overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-gradient-to-b from-background via-accent/5 to-background overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_oklch(0.6723_0.1606_244.9955/0.08),transparent_50%)]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -549,7 +549,7 @@ export default function Services() {
             </p>
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {[
               { title: "Site vitrine (base)", desc: "À partir de 700 € — site professionnel avec design moderne et responsive.", featured: false },
               { title: "Maintenance + Hébergement", desc: "30 € / mois — mises à jour, sécurité, sauvegardes et support technique.", featured: false },
@@ -599,7 +599,7 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="relative py-32 bg-gradient-to-br from-primary/10 via-background to-accent/5 overflow-hidden">
+      <section className="relative py-20 sm:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/5 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_oklch(0.6723_0.1606_244.9955/0.15),transparent_70%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0%,oklch(0.6723_0.1606_244.9955/0.05)_50%,transparent_100%)]" />
 
@@ -616,7 +616,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, ease: easeOut }}
-              className="font-heading text-3xl md:text-5xl font-bold text-foreground mb-6"
+              className="font-heading text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6"
             >
               Prêt à démarrer votre projet ?
             </motion.h2>
@@ -626,7 +626,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.15, duration: 0.7, ease: easeOut }}
-              className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 sm:mb-12 max-w-2xl mx-auto px-4"
             >
               Découvrez nos réalisations, lancez-vous ou apprenez-en plus sur notre approche collaborative.
             </motion.p>
@@ -636,21 +636,21 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.3, duration: 0.7, ease: easeOut }}
-              className="flex flex-wrap items-center justify-center gap-4"
+              className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
             >
-              <Button asChild variant="outline" size="lg" className="px-8 py-6 text-base group border-2 hover:border-primary/50">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group border-2 hover:border-primary/50">
                 <Link to="/portfolio" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
                   Voir des exemples
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
-              <Button asChild size="lg" className="px-8 py-6 text-base group bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button asChild size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
                   Démarrer votre projet
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="px-8 py-6 text-base group">
+              <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group">
                 <Link to="/about" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
                   En savoir plus
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />

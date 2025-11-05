@@ -186,7 +186,7 @@ export const Footer = () => {
                 </motion.div>
                 <a
                   href="mailto:nevos.website@gmail.com"
-                  className="hover:text-primary transition-colors duration-300 font-medium break-all"
+                  className="hover:text-primary transition-colors duration-300 font-medium break-words text-sm sm:text-base"
                 >
                   nevos.website@gmail.com
                 </a>

@@ -108,7 +108,7 @@ export default function Contact() {
       </div>
 
       {/* Hero Section */}
-      <section className="py-32 bg-background relative">
+      <section className="py-20 sm:py-32 bg-background relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -132,17 +132,17 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-foreground leading-tight tracking-tight"
+              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 text-foreground leading-tight tracking-tight"
             >
               Contactez-nous
             </motion.h1>
 
             {/* Description améliorée */}
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12"
+              className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-10 sm:mb-12 px-4"
             >
               Une question, un projet ou besoin d'un devis ? Nous sommes à votre écoute pour vous accompagner dans votre transformation digitale.
             </motion.p>
@@ -152,7 +152,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 mt-10 sm:mt-12"
             >
               <motion.div 
                 whileHover={{ scale: 1.05 }}
@@ -174,9 +174,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Section - Grid 2/5 infos, 3/5 formulaire */}
-      <section className="py-20 bg-card relative">
+      <section className="py-16 sm:py-20 bg-card relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 max-w-7xl mx-auto">
             {/* Colonne gauche (2/5) - Informations */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}

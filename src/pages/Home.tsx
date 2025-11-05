@@ -100,14 +100,15 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <ShimmerButton
-                  onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
-                  className="text-lg"
-                  background="oklch(0.2097 0.008 274.5332)"
-                  shimmerColor="#ffffff"
-                >
-                  Commencer maintenant →
-                </ShimmerButton>
+                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                  <ShimmerButton
+                    className="text-lg"
+                    background="oklch(0.2097 0.008 274.5332)"
+                    shimmerColor="#ffffff"
+                  >
+                    Commencer maintenant →
+                  </ShimmerButton>
+                </Link>
                 <Button asChild size="lg" variant="outline" className="text-lg px-8 py-6 border-border text-foreground hover:bg-foreground/10">
                   <Link to="/portfolio" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Découvrir nos projets</Link>
                 </Button>
@@ -288,15 +289,16 @@ export default function Home() {
                   transition={{ delay: 0.8, duration: 0.5 }}
                   className="mb-6 flex justify-center"
                 >
-                  <ShimmerButton
-                    className="text-lg px-12 py-4 font-semibold"
-                    borderRadius="12px"
-                    background="oklch(0.2097 0.008 274.5332)"
-                    shimmerColor="#ffffff"
-                    onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
-                  >
-                    Demander mon prototype gratuit →
-                  </ShimmerButton>
+                  <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <ShimmerButton
+                      className="text-lg px-12 py-4 font-semibold"
+                      borderRadius="12px"
+                      background="oklch(0.2097 0.008 274.5332)"
+                      shimmerColor="#ffffff"
+                    >
+                      Demander mon prototype gratuit →
+                    </ShimmerButton>
+                  </Link>
                 </motion.div>
 
                 {/* Note en bas */}

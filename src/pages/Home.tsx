@@ -5,11 +5,14 @@ import ShimmerButton from "@/components/ui/shimmer-button";
 // Highlighter retiré
 import { ServiceCard } from "@/components/ServiceCard";
 import Globe from "@/components/Globe";
+import { MobileGradient } from "@/components/MobileGradient";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Palette, Globe as GlobeIcon, CalendarDays, Truck, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import LogoLoop from "@/components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { getOptimizedAnimation, addWillChange, getScrollAnimation } from "@/utils/animations";
 
 // Services (depuis accueil.md)
 const services = [
@@ -58,6 +61,7 @@ const services = [
 // (Supprimé) Témoignages — non requis par accueil.md
 
 export default function Home() {
+  const isMobile = useIsMobile(768);
   const [globeSize, setGlobeSize] = useState(500);
 
   useEffect(() => {
@@ -80,16 +84,19 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section with Globe */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--background)] via-[var(--accent)] to-[var(--background)]">
-        {/* Animated beams background behind content and planet */}
-        <BackgroundBeams className="absolute inset-0 z-0 opacity-60" />
+        {/* Animated beams background behind content and planet - Disabled on mobile for performance */}
+        {!isMobile && <BackgroundBeams className="absolute inset-0 z-0 opacity-60" />}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Contenu texte */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              {...getOptimizedAnimation(isMobile, {
+                initial: { opacity: 0, x: -50 },
+                animate: { opacity: 1, x: 0 },
+                transition: { duration: 0.8 },
+              })}
               className="relative z-10 text-center lg:text-left"
+              style={addWillChange(['opacity', 'transform'])}
             >
               <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
                 Montrez vos <span className="animated-gradient-text">compétences</span> au monde
@@ -115,18 +122,28 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Globe */}
+            {/* Globe - Lightweight gradient on mobile, full 3D on desktop */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              {...getOptimizedAnimation(isMobile, {
+                initial: { opacity: 0, x: 50 },
+                animate: { opacity: 1, x: 0 },
+                transition: { duration: 0.8, delay: 0.2 },
+              })}
               className="relative z-10 flex justify-center"
+              style={addWillChange(['opacity', 'transform'])}
             >
-             <Globe
-                size={globeSize}
-                rotationSpeed={0.001}
-                className="drop-shadow-2xl"
-              />
+              {isMobile ? (
+                <MobileGradient
+                  size={globeSize}
+                  className="drop-shadow-2xl"
+                />
+              ) : (
+                <Globe
+                  size={globeSize}
+                  rotationSpeed={0.001}
+                  className="drop-shadow-2xl"
+                />
+              )}
             </motion.div>
           </div>
         </div>
@@ -170,9 +187,7 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...getScrollAnimation(isMobile)}
             className="text-center mb-12 sm:mb-16"
           >
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
@@ -185,7 +200,12 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
-              <ServiceCard key={idx} {...service} index={idx} />
+              <motion.div
+                key={idx}
+                {...getScrollAnimation(isMobile, { delay: idx, stagger: true })}
+              >
+                <ServiceCard {...service} index={idx} />
+              </motion.div>
             ))}
           </div>
         </div>

@@ -4,12 +4,11 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { motion, AnimatePresence } from "framer-motion";
-import logoNevos from "../../asset/Logo nevosoff.png";
 
 const navigation = [
   { name: "Accueil", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Nos réalisations", href: "/portfolio" },
   { name: "À Propos", href: "/about" },
 ];
 
@@ -38,7 +37,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-0.5">
-            <img src={logoNevos} alt="Nevos" className="h-16 w-auto md:h-20 -my-1 md:-my-2" />
+            <img src="/asset/Logo nevosoff.png" alt="Nevos" className="h-16 w-auto md:h-20 -my-1 md:-my-2" />
             <span className="font-heading leading-none font-bold text-xl text-foreground">Nevos</span>
           </Link>
 
@@ -53,6 +52,7 @@ export const Header = () => {
                         to={item.href}
                         className={`pill${location.pathname === item.href ? " is-active" : ""}`}
                         aria-label={item.name}
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                       >
                         <span className="label-stack">
                           <span className="pill-label">{item.name}</span>
@@ -69,7 +69,7 @@ export const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <ShimmerButton
-              onClick={() => window.location.assign('/contact')}
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
               className="text-lg"
               background="oklch(0.2097 0.008 274.5332)"
               shimmerColor="#ffffff"

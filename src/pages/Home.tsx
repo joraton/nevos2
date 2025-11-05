@@ -75,14 +75,14 @@ export default function Home() {
               <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
                 Montrez vos <span className="animated-gradient-text">compétences</span> au monde
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-10 leading-relaxed">
-                Créez des expériences digitales qui marquent les esprits et propulsent votre expertise à l'échelle mondiale.
+                Restaurant, artisan, commerçant ? Nous concevons des sites web professionnels pour attirer plus de clients, valoriser votre savoir-faire et développer votre activité locale.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <ShimmerButton
-                  onClick={() => window.location.assign('/contact')}
+                  onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
                   className="text-lg"
                   background="oklch(0.2097 0.008 274.5332)"
                   shimmerColor="#ffffff"
@@ -90,7 +90,7 @@ export default function Home() {
                   Commencer maintenant →
                 </ShimmerButton>
                 <Button asChild size="lg" variant="outline" className="text-lg px-8 py-6 border-border text-foreground hover:bg-foreground/10">
-                  <Link to="/portfolio">Découvrir nos projets</Link>
+                  <Link to="/portfolio" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Découvrir nos projets</Link>
                 </Button>
               </div>
             </motion.div>
@@ -219,7 +219,7 @@ export default function Home() {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="font-heading text-4xl md:text-5xl font-bold mb-6"
                 >
-                  Prototype <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Gratuit</span>
+                  Prototype <span className="text-primary font-bold">Gratuit</span>
                 </motion.h2>
 
                 {/* Description */}
@@ -274,7 +274,7 @@ export default function Home() {
                     borderRadius="12px"
                     background="oklch(0.2097 0.008 274.5332)"
                     shimmerColor="#ffffff"
-                    onClick={() => window.location.assign('/contact')}
+                    onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
                   >
                     Demander mon prototype gratuit →
                   </ShimmerButton>
@@ -319,16 +319,13 @@ export default function Home() {
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               Transformez votre vision en <span className="animated-gradient-text">réalité digitale</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-6">
+            <p className="text-xl text-muted-foreground mb-8">
               Rejoignez les entrepreneurs qui ont fait confiance à notre expertise pour <span className="font-semibold">propulser leur business en ligne</span>.
-            </p>
-            <p className="mb-8 text-primary">
-              Offre limitée — <span className="font-semibold">30% sur les frais de mise en service</span>
             </p>
 
             <div className="flex justify-center">
               <Button asChild size="lg" className="text-lg px-10 py-6">
-                <Link to="/contact">Démarrer mon projet</Link>
+                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Démarrer mon projet</Link>
               </Button>
             </div>
           </motion.div>

@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Lightbulb, Users, Clock } from "lucide-react";
 import "@/components/SpaceBG.css";
-import aproposImg from "../../asset/a propos.png";
 
 export default function About() {
   return (
@@ -35,7 +34,12 @@ export default function About() {
               </p>
               <div className="flex items-center gap-4">
                 <Button asChild size="lg" className="px-8 py-6">
-                  <Link to="/contact">Discutons de votre projet →</Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  >
+                    Discutons de votre projet →
+                  </Link>
                 </Button>
               </div>
             </motion.div>
@@ -48,7 +52,7 @@ export default function About() {
               className="relative"
             >
               <motion.img
-                src={aproposImg}
+                src="/asset/a propos.png"
                 alt="Présentation de Nevos"
                 className="w-full h-auto rounded-2xl shadow-2xl ring-1 ring-white/10 object-cover"
                 whileHover={{ scale: 1.02 }}
@@ -120,7 +124,12 @@ export default function About() {
                 </p>
                 <div className="mt-4">
                   <Button asChild size="sm" variant="default" className="px-4">
-                    <Link to="/services">Découvrir nos services →</Link>
+                    <Link
+                      to="/services"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    >
+                      Découvrir nos services →
+                    </Link>
                   </Button>
                 </div>
               </motion.li>
@@ -189,7 +198,12 @@ export default function About() {
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">Un projet digital en tête ?</h2>
             <p className="text-lg text-muted-foreground mb-8">Dites-nous tout ! Notre équipe vous contacte le jour même pour discuter de votre projet.</p>
             <Button asChild size="lg" className="text-lg px-10 py-6">
-              <Link to="/contact">Je passe à l'action →</Link>
+              <Link
+                to="/contact"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Je passe à l'action →
+              </Link>
             </Button>
           </motion.div>
         </div>

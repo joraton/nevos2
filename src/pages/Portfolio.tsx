@@ -2,6 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass-card";
+import { BackgroundPathsHero } from "@/components/ui/background-paths-hero";
+import ShimmerButton from "@/components/ui/shimmer-button";
 
 const categories = ["Tous", "Restaurant", "Commerce"];
 
@@ -57,26 +60,11 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-              Portfolio
-            </div>
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-6">
-              Nos réalisations
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Découvrez quelques exemples de sites que nous avons créés pour des entreprises fictives. Chaque projet est unique et adapté à l'identité du restaurant.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Hero Section with 36 Floating Paths */}
+      <BackgroundPathsHero
+        title="Nos Réalisations"
+        subtitle="Découvrez quelques exemples de sites que nous avons créés pour des entreprises. Chaque projet est unique et adapté à l'identité de votre marque."
+      />
 
       {/* Filters */}
       <section className="py-8 bg-card sticky top-20 z-40 border-b border-border">
@@ -99,23 +87,21 @@ export default function Portfolio() {
       {/* Projects Grid */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 key={`${project.title}-${idx}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -12, transition: { duration: 0.3, ease: "easeOut" } }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="group relative"
+                className="group relative h-full"
               >
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative bg-card border border-border rounded-2xl p-6 h-full hover:shadow-xl transition-all duration-300">
+                {/* Gradient background directly on the card container */}
+                <div className="absolute -inset-0.5 rounded-3xl opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500 bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,transparent)]" />
+
+                <LiquidGlassCard className="relative border border-border rounded-3xl h-full shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-background dark:bg-card">
                   {/* Aperçu image cliquable */}
                   <a
                     href={project.link}
@@ -166,10 +152,10 @@ export default function Portfolio() {
                       <ExternalLink size={16} className="group-hover/link:translate-x-1 transition-transform" />
                     </a>
                   </div>
-                </div>
+                </LiquidGlassCard>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
           {filteredProjects.length === 0 && (
             <div className="text-center py-16">
@@ -196,9 +182,15 @@ export default function Portfolio() {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
               Rejoignez nos clients satisfaits et donnez vie à votre vision digitale.
             </p>
-            <Button asChild size="lg" className="text-lg px-10 py-6">
-              <a href="/contact">Démarrer un projet →</a>
-            </Button>
+            <ShimmerButton
+              className="text-lg px-10 py-6 mx-auto mt-6 w-fit"
+              background="oklch(0.2097 0.008 274.5332)"
+              shimmerColor="#ffffff"
+              borderRadius="12px"
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); window.location.assign('/contact'); }}
+            >
+              Démarrer un projet →
+            </ShimmerButton>
           </motion.div>
         </div>
       </section>

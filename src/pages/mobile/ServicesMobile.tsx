@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import lottie from "lottie-web";
+import { unzipSync } from "fflate";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -34,6 +36,52 @@ export default function ServicesMobile() {
   }, []);
 
   // Animations scroll via framer-motion (whileInView)
+
+  // Référence pour l’animation Lottie dans le héros Services
+  const heroAnimRef = useRef<HTMLDivElement | null>(null);
+
+  // Charger le fichier .lottie "Site Stats and Data.lottie" depuis /public/asset
+  useEffect(() => {
+    let anim: any;
+    const loadLottie = async () => {
+      try {
+        let data: any | null = null;
+        // Tenter un JSON compagnon si présent (non obligatoire)
+        const jsonRes = await fetch("/asset/Site%20Stats%20and%20Data.json");
+        if (jsonRes.ok) {
+          data = await jsonRes.json();
+        } else {
+          // Fallback: charger le .lottie
+          const res = await fetch("/asset/Site%20Stats%20and%20Data.lottie");
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          try {
+            const text = await res.clone().text();
+            data = JSON.parse(text);
+          } catch {
+            const buf = await res.arrayBuffer();
+            const files = unzipSync(new Uint8Array(buf));
+            const jsonEntry = Object.keys(files).find((p) => p.endsWith(".json"));
+            if (!jsonEntry) throw new Error("Aucun JSON trouvé dans le .lottie");
+            const jsonStr = new TextDecoder("utf-8").decode(files[jsonEntry]);
+            data = JSON.parse(jsonStr);
+          }
+        }
+        if (heroAnimRef.current) {
+          anim = lottie.loadAnimation({
+            container: heroAnimRef.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: data,
+          });
+        }
+      } catch (e) {
+        console.error("Erreur chargement Lottie Services:", e);
+      }
+    };
+    loadLottie();
+    return () => { if (anim) anim.destroy(); };
+  }, []);
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: "auto" });
 
@@ -183,6 +231,16 @@ export default function ServicesMobile() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
+            {/* Lottie hero pour Services (mobile) */}
+            <motion.div
+              className="mx-auto mb-6 w-56 h-56"
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div ref={heroAnimRef} style={{ width: "100%", height: "100%" }} />
+            </motion.div>
             <motion.div
               className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
               initial={{ opacity: 0, scale: 0.98 }}

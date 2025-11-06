@@ -1,10 +1,14 @@
 import { motion, easeOut, easeInOut } from "framer-motion";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
 import BackgroundPaths from "@/components/BackgroundPaths";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import ServicesMobile from "@/pages/mobile/ServicesMobile";
 import {
   Globe,
   CalendarDays,
@@ -27,6 +31,29 @@ import {
 export default function Services() {
   const isMobile = useIsMobile(768);
   const shouldAnimate = !isMobile;
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: isMobile ? 'auto' : 'smooth' });
+  };
+
+  // Désactiver le smooth scroll sur mobile pour cette page
+  // (la feuille globale définit html{scroll-behavior:smooth})
+  // On force à auto le temps de la visite
+  // pour respecter l’absence totale d’animations sur mobile
+  useEffect(() => {
+    if (!isMobile) return;
+    const html = document.documentElement;
+    const previous = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    return () => {
+      html.style.scrollBehavior = previous;
+    };
+  }, [isMobile]);
+
+  // Initialiser AOS sur desktop uniquement
+  useEffect(() => {
+    if (!shouldAnimate) return;
+    AOS.init({ duration: 700, once: true, offset: 50, easing: 'ease-out' });
+  }, [shouldAnimate]);
 
   // Animation variants pour le fade-in
   const fadeInUp = shouldAnimate
@@ -56,8 +83,10 @@ export default function Services() {
       }
     : {};
 
-  return (
-    <div className="min-h-screen pt-20">
+  return isMobile ? (
+    <ServicesMobile />
+  ) : (
+    <div className={`min-h-screen pt-20`}>
       {/* Hero */}
       <section className="relative py-20 sm:py-32 overflow-hidden bg-gradient-to-br from-background via-background to-accent/5">
         {/* Animated gradient blobs */}
@@ -103,17 +132,19 @@ export default function Services() {
             animate={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
             transition={shouldAnimate ? { duration: 0.8, ease: easeOut } : undefined}
             className="text-center max-w-4xl mx-auto"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <motion.div
               initial={shouldAnimate ? { opacity: 0, scale: 0.9 } : undefined}
               animate={shouldAnimate ? { opacity: 1, scale: 1 } : undefined}
               transition={shouldAnimate ? { delay: 0.2, duration: 0.6 } : undefined}
               className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+              data-aos={shouldAnimate ? 'zoom-in' : undefined}
             >
               <span className="text-sm font-medium text-primary">Votre partenaire digital</span>
             </motion.div>
 
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight" data-aos={shouldAnimate ? 'fade-up' : undefined}>
               Nos <span className="relative inline-block">
                 <span className="relative z-10">Services</span>
                 <motion.span
@@ -125,7 +156,7 @@ export default function Services() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4" data-aos={shouldAnimate ? 'fade-up' : undefined}>
               Sites élégants, faciles à maintenir, pensés pour convertir — de l'idée au lancement, avec accompagnement continu.
             </p>
 
@@ -134,6 +165,7 @@ export default function Services() {
               animate={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
               transition={shouldAnimate ? { delay: 0.6, duration: 0.6 } : undefined}
               className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4"
+              data-aos={shouldAnimate ? 'fade-up' : undefined}
             >
               {[
                 "Design sur‑mesure",
@@ -161,6 +193,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="max-w-4xl mx-auto"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <div className="glass-card p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border-2 border-primary/20 shadow-xl">
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed text-center">
@@ -183,6 +216,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="text-center mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Ce que nous proposons
@@ -194,9 +228,10 @@ export default function Services() {
 
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true, margin: "-100px" }}
+            initial={shouldAnimate ? "initial" : undefined}
+            whileInView={shouldAnimate ? "whileInView" : undefined}
+            viewport={shouldAnimate ? { once: true, margin: "-100px" } : undefined}
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             {[
               {
@@ -264,6 +299,7 @@ export default function Services() {
                 transition={shouldAnimate ? { delay: idx * 0.15, duration: 0.6, ease: easeOut } : undefined}
                 whileHover={shouldAnimate ? { y: -8, transition: { duration: 0.2 } } : undefined}
                 className="group"
+                data-aos={shouldAnimate ? 'fade-up' : undefined}
               >
                 <Card className="p-8 h-full glass-card-hover relative overflow-hidden border-2 border-border hover:border-primary/50">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500" />
@@ -308,6 +344,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="text-center mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               Compétences
@@ -333,6 +370,7 @@ export default function Services() {
                 transition={shouldAnimate ? { delay: idx * 0.15, duration: 0.6, ease: easeOut } : undefined}
                 whileHover={shouldAnimate ? { y: -6, transition: { duration: 0.2 } } : undefined}
                 className="group"
+                data-aos={shouldAnimate ? 'fade-up' : undefined}
               >
                 <Card className="p-8 h-full glass-card-hover border-2 border-border hover:border-primary/40 relative overflow-hidden">
                   <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-primary/10 to-transparent rounded-full translate-x-16 translate-y-16 group-hover:scale-150 transition-transform duration-500" />
@@ -370,6 +408,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="text-center mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               Processus
@@ -391,11 +430,12 @@ export default function Services() {
             ].map((p, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.1, duration: 0.6, ease: easeOut }}
+                initial={shouldAnimate ? { opacity: 0, y: 30, scale: 0.95 } : undefined}
+                whileInView={shouldAnimate ? { opacity: 1, y: 0, scale: 1 } : undefined}
+                viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+                transition={shouldAnimate ? { delay: idx * 0.1, duration: 0.6, ease: easeOut } : undefined}
                 className="group relative"
+                data-aos={shouldAnimate ? 'fade-up' : undefined}
               >
                 <Card className="p-6 h-full glass-card hover:shadow-lg transition-all duration-300 border-2 border-border group-hover:border-primary/30">
                   <div className="flex flex-col items-center text-center">
@@ -432,6 +472,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="text-center mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               FAQ
@@ -442,11 +483,12 @@ export default function Services() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: easeOut }}
+            initial={shouldAnimate ? { opacity: 0, y: 40 } : undefined}
+            whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+            viewport={shouldAnimate ? { once: true, margin: "-100px" } : undefined}
+            transition={shouldAnimate ? { duration: 0.7, ease: easeOut } : undefined}
             className="max-w-4xl mx-auto glass-card p-6 sm:p-8 rounded-2xl sm:rounded-3xl border-2 border-border"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <Accordion type="single" collapsible className="space-y-4">
               {[
@@ -526,6 +568,7 @@ export default function Services() {
           <motion.div
             {...fadeInUp}
             className="text-center mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
               Tarifs indicatifs
@@ -551,6 +594,7 @@ export default function Services() {
                 transition={shouldAnimate ? { delay: idx * 0.12, duration: 0.6, ease: easeOut } : undefined}
                 whileHover={shouldAnimate ? { y: -4, transition: { duration: 0.2 } } : undefined}
                 className={`group ${t.featured ? 'lg:col-span-3' : ''}`}
+                data-aos={shouldAnimate ? 'fade-up' : undefined}
               >
                 <Card className={`p-8 h-full glass-card-hover relative overflow-hidden ${
                   t.featured
@@ -596,6 +640,7 @@ export default function Services() {
             viewport={shouldAnimate ? { once: true, margin: "-100px" } : undefined}
             transition={shouldAnimate ? { duration: 0.8, ease: easeOut } : undefined}
             className="text-center max-w-4xl mx-auto"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <motion.h2
               initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
@@ -625,19 +670,19 @@ export default function Services() {
               className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
             >
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group border-2 hover:border-primary/50">
-                <Link to="/portfolio" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
+              <Link to="/portfolio" onClick={scrollTop} className="flex items-center gap-2">
                   Voir des exemples
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
               <Button asChild size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300">
-                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
+              <Link to="/contact" onClick={scrollTop} className="flex items-center gap-2">
                   Démarrer votre projet
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
               <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group">
-                <Link to="/about" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2">
+              <Link to="/about" onClick={scrollTop} className="flex items-center gap-2">
                   En savoir plus
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>

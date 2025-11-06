@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Button } from "@/components/ui/button";
 import ShimmerButton from "@/components/ui/shimmer-button";
 // Highlighter retiré
@@ -13,6 +15,7 @@ import LogoLoop from "@/components/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { getOptimizedAnimation, addWillChange, getScrollAnimation } from "@/utils/animations";
+import HomeMobile from "@/pages/mobile/HomeMobile";
 
 // Services (depuis accueil.md)
 const services = [
@@ -62,7 +65,11 @@ const services = [
 
 export default function Home() {
   const isMobile = useIsMobile(768);
+  const shouldAnimate = !isMobile;
   const [globeSize, setGlobeSize] = useState(500);
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: isMobile ? 'auto' : 'smooth' });
+  };
 
   useEffect(() => {
     const updateGlobeSize = () => {
@@ -80,8 +87,27 @@ export default function Home() {
     return () => window.removeEventListener('resize', updateGlobeSize);
   }, []);
 
-  return (
-    <div className="min-h-screen">
+  // Désactiver le smooth scroll sur mobile pour cette page
+  useEffect(() => {
+    if (!isMobile) return;
+    const html = document.documentElement;
+    const previous = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    return () => {
+      html.style.scrollBehavior = previous;
+    };
+  }, [isMobile]);
+
+  // Initialiser AOS sur desktop uniquement
+  useEffect(() => {
+    if (!shouldAnimate) return;
+    AOS.init({ duration: 700, once: true, offset: 50, easing: 'ease-out' });
+  }, [shouldAnimate]);
+
+  return isMobile ? (
+    <HomeMobile />
+  ) : (
+    <div className={`min-h-screen`}>
       {/* Hero Section with Globe */}
       <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--background)] via-[var(--accent)] to-[var(--background)] pt-[env(safe-area-inset-top)]">
         {/* Animated beams background behind content and planet - Disabled on mobile for performance */}
@@ -97,6 +123,7 @@ export default function Home() {
               })}
               className="relative z-10 text-center lg:text-left"
               style={addWillChange(isMobile, ['opacity', 'transform'])}
+              data-aos={shouldAnimate ? 'fade-up' : undefined}
             >
               <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
                 Montrez vos <span className="animated-gradient-text">compétences</span> au monde
@@ -107,7 +134,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center sm:items-start">
-                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <Link to="/contact" onClick={scrollTop}>
                   <ShimmerButton
                     className="text-base sm:text-lg w-full sm:w-auto"
                     background="oklch(0.2097 0.008 274.5332)"
@@ -117,8 +144,8 @@ export default function Home() {
                   </ShimmerButton>
                 </Link>
                 <Button asChild size="lg" variant="outline" className="text-base sm:text-lg px-6 py-4 sm:px-8 sm:py-6 border-border text-foreground hover:bg-foreground/10 w-full sm:w-auto">
-                  <Link to="/portfolio" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Découvrir nos projets</Link>
-                </Button>
+                  <Link to="/portfolio" onClick={scrollTop}>Découvrir nos projets</Link>
+                  </Button>
               </div>
             </motion.div>
 
@@ -150,7 +177,7 @@ export default function Home() {
       </section>
 
       {/* Logo Loop Transition */}
-      <section className="py-8 sm:py-12 bg-background overflow-x-hidden">
+      <section className="py-8 sm:py-12 bg-background overflow-x-hidden" data-aos={shouldAnimate ? 'fade-up' : undefined}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-4 sm:mb-6">
             <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground">technologies maitrisées</h3>
@@ -194,11 +221,12 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background" data-aos={shouldAnimate ? 'fade-up' : undefined}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             {...getScrollAnimation(isMobile)}
             className="text-center mb-12 sm:mb-16"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
               Nos services
@@ -213,6 +241,7 @@ export default function Home() {
               <motion.div
                 key={idx}
                 {...getScrollAnimation(isMobile, { delay: idx, stagger: true })}
+                data-aos={shouldAnimate ? 'fade-up' : undefined}
               >
                 <ServiceCard {...service} index={idx} />
               </motion.div>
@@ -232,6 +261,7 @@ export default function Home() {
           <motion.div
             {...getScrollAnimation(isMobile, { delay: 0 })}
             className="max-w-3xl mx-auto"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             {/* Carte principale */}
             <motion.div
@@ -246,6 +276,7 @@ export default function Home() {
                 <motion.div
                   {...getScrollAnimation(isMobile, { delay: 0.3 })}
                   className="flex justify-center mb-8"
+                  data-aos={shouldAnimate ? 'zoom-in' : undefined}
                 >
                   <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-primary/30 shadow-lg flex items-center justify-center backdrop-blur-sm">
                     <Palette className="text-primary" size={40} />
@@ -256,6 +287,7 @@ export default function Home() {
                 <motion.h2
                   {...getScrollAnimation(isMobile, { delay: 0.4 })}
                   className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
+                  data-aos={shouldAnimate ? 'fade-up' : undefined}
                 >
                   Prototype <span className="text-primary font-bold">Gratuit</span>
                 </motion.h2>
@@ -264,6 +296,7 @@ export default function Home() {
                 <motion.p
                   {...getScrollAnimation(isMobile, { delay: 0.5 })}
                   className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2"
+                  data-aos={shouldAnimate ? 'fade-up' : undefined}
                 >
                   Nous réalisons <span className="font-semibold text-primary">gratuitement</span> un prototype de votre site web une fois que vous nous contactez pour une demande. Visualisez votre projet avant de vous engager !
                 </motion.p>
@@ -272,6 +305,7 @@ export default function Home() {
                 <motion.div
                   {...getScrollAnimation(isMobile, { delay: 0.6 })}
                   className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 max-w-xl mx-auto"
+                  data-aos={shouldAnimate ? 'fade-up' : undefined}
                 >
                   {[
                     "Maquette personnalisée",
@@ -294,10 +328,11 @@ export default function Home() {
                 <motion.div
                   {...getScrollAnimation(isMobile, { delay: 0.8 })}
                   className="mb-6 flex justify-center"
+                  data-aos={shouldAnimate ? 'fade-up' : undefined}
                 >
                   <Link
                     to="/contact"
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={scrollTop}
                     className="block w-full sm:w-auto"
                   >
                     <ShimmerButton
@@ -315,6 +350,7 @@ export default function Home() {
                 <motion.p
                   {...getScrollAnimation(isMobile, { delay: 0.9 })}
                   className="text-xs text-muted-foreground/80"
+                  data-aos={shouldAnimate ? 'fade' : undefined}
                 >
                   * Prototype réalisé après étude de votre demande et validation du projet
                 </motion.p>
@@ -325,11 +361,12 @@ export default function Home() {
       </section>
 
       {/* CTA finale */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background" data-aos={shouldAnimate ? 'fade-up' : undefined}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             {...getScrollAnimation(isMobile, { delay: 0 })}
             className="text-center max-w-4xl mx-auto"
+            data-aos={shouldAnimate ? 'fade-up' : undefined}
           >
             <div className="mb-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -351,7 +388,7 @@ export default function Home() {
 
             <div className="flex justify-center">
               <Button asChild size="lg" className="text-base sm:text-lg px-8 py-5 sm:px-10 sm:py-6">
-                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Démarrer mon projet</Link>
+                <Link to="/contact" onClick={scrollTop}>Démarrer mon projet</Link>
               </Button>
             </div>
           </motion.div>

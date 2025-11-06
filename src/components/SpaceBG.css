@@ -1,0 +1,63 @@
+.space-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.space-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1.4px 1.4px at 80% 50%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.65), transparent 60%);
+  opacity: 0.6;
+  animation: starsTwinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes starsTwinkle {
+  from { opacity: 0.4; }
+  to { opacity: 0.8; }
+}
+
+.space-nebula {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120px 120px at 20% 30%, rgba(147, 51, 234, 0.15), transparent 70%),
+    radial-gradient(160px 160px at 80% 60%, rgba(59, 130, 246, 0.12), transparent 70%),
+    radial-gradient(200px 200px at 50% 80%, rgba(16, 185, 129, 0.10), transparent 70%);
+  filter: blur(2px);
+}
+
+.space-meteor {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,0.0) 100%);
+  opacity: 0.35;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.meteor-1 {
+  top: 20%;
+  left: -10%;
+  animation: meteorFly 9s linear infinite;
+}
+
+.meteor-2 {
+  top: 65%;
+  left: -15%;
+  animation: meteorFly 12s linear infinite;
+}
+
+@keyframes meteorFly {
+  0% { transform: translate3d(0, 0, 0) rotate(-20deg); opacity: 0; }
+  5% { opacity: 0.35; }
+  100% { transform: translate3d(140vw, -40vh, 0) rotate(-20deg); opacity: 0; }
+}
+

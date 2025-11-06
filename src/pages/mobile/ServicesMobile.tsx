@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -34,10 +33,7 @@ export default function ServicesMobile() {
     };
   }, []);
 
-  // Initialiser AOS sur mobile
-  useEffect(() => {
-    AOS.init({ duration: 700, once: true, offset: 50, easing: "ease-out" });
-  }, []);
+  // Animations scroll via framer-motion (whileInView)
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: "auto" });
 
@@ -178,154 +174,269 @@ export default function ServicesMobile() {
   return (
     <div className="min-h-screen no-motion pt-20">
       {/* Hero */}
-      <section className="relative py-16 bg-gradient-to-br from-background via-background to-accent/5" data-aos="fade-up">
+      <section className="relative py-16 bg-gradient-to-br from-background via-background to-accent/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto" data-aos="fade-up">
-            <div className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20" data-aos="zoom-in">
+          <motion.div
+            className="text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.div
+              className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
               <span className="text-sm font-medium text-primary">Votre partenaire digital</span>
-            </div>
-            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-4" data-aos="fade-up">Nos Services</h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            </motion.div>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-4">Nos Services</h1>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Sites élégants, faciles à maintenir, pensés pour convertir — de l'idée au lancement, avec accompagnement continu.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 px-4" data-aos="fade-up" data-aos-delay="200">
-              {heroChips.map((t) => (
-                <span key={t} className="px-5 py-2 text-sm font-medium rounded-full glass-card border border-border">
+            <motion.div
+              className="mt-8 flex flex-wrap items-center justify-center gap-3 px-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              {heroChips.map((t, idx) => (
+                <motion.span
+                  key={t}
+                  className="px-5 py-2 text-sm font-medium rounded-full glass-card border border-border"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.1 + idx * 0.06, ease: "easeOut" }}
+                >
                   {t}
-                </span>
+                </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Aperçu */}
-      <section className="relative py-16 bg-gradient-to-b from-card to-background" data-aos="fade-up">
+      <section className="relative py-16 bg-gradient-to-b from-card to-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto" data-aos="fade-up">
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border-2 border-primary/20" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.div
+              className="glass-card p-6 sm:p-8 rounded-2xl border-2 border-primary/20"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            >
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-center">
                 <span className="font-semibold text-foreground">Nevos</span> conçoit des sites vitrine modernes et efficaces pour petites entreprises et indépendants. Nous maîtrisons la mise en page, les animations, la clarté des messages, et nous privilégions la simplicité pour que ton site travaille pour toi. Et tu gardes la main grâce à un <span className="font-medium text-primary">espace d'administration facile</span>.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Bloc Services */}
-      <section className="relative py-16 bg-background" data-aos="fade-up">
+      <section className="relative py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3" data-aos="fade-up">Ce que nous proposons</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Ce que nous proposons</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Des modules simples et utiles, centrés sur l'essentiel.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             {services.map((s, idx) => (
-              <Card key={idx} className="p-8 h-full border-2 border-border" data-aos="fade-up" data-aos-delay={100 + idx * 100}>
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 rounded-2xl bg-primary/10">
-                      <s.icon className="h-6 w-6 text-primary" />
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1, ease: "easeOut" }}
+              >
+                <Card className="p-8 h-full border-2 border-border">
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-3 rounded-2xl bg-primary/10">
+                        <s.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold text-foreground">
+                        {s.title}
+                      </h3>
                     </div>
-                    <h3 className="font-heading text-xl font-bold text-foreground">
-                      {s.title}
-                    </h3>
+                    <ul className="space-y-3 text-muted-foreground">
+                      {s.bullets.map((b, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="mt-1.5 inline-block w-2 h-2 rounded-full bg-primary" />
+                          <span className="leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-3 text-muted-foreground">
-                    {s.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-3" data-aos="fade-up" data-aos-delay={150 + i * 100}>
-                        <span className="mt-1.5 inline-block w-2 h-2 rounded-full bg-primary" />
-                        <span className="leading-relaxed">{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Compétences */}
-      <section className="relative py-16 bg-card" data-aos="fade-up">
+      <section className="relative py-16 bg-card">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3" data-aos="fade-up">Compétences</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Compétences</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Ce qui fait la qualité et la simplicité d'usage.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             {competences.map((c, idx) => (
-              <Card key={idx} className="p-8 h-full border-2 border-border" data-aos="fade-up" data-aos-delay={100 + idx * 100}>
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="p-3 rounded-xl bg-primary/10">
-                      <c.icon className="h-6 w-6 text-primary" />
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1, ease: "easeOut" }}
+              >
+                <Card className="p-8 h-full border-2 border-border">
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="p-3 rounded-xl bg-primary/10">
+                        <c.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold text-foreground">
+                        {c.title}
+                      </h3>
                     </div>
-                    <h3 className="font-heading text-xl font-bold text-foreground">
-                      {c.title}
-                    </h3>
+                    <ul className="space-y-3 text-muted-foreground">
+                      {c.bullets.map((b, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-3 text-muted-foreground">
-                    {c.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-3" data-aos="fade-up" data-aos-delay={150 + i * 100}>
-                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="leading-relaxed">{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Processus */}
-      <section className="relative py-16 bg-background" data-aos="fade-up">
+      <section className="relative py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3" data-aos="fade-up">Processus</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Processus</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Du cadrage à l'accompagnement continu.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             {processSteps.map((p, idx) => (
-              <Card key={idx} className="p-6 h-full border-2 border-border" data-aos="fade-up" data-aos-delay={100 + idx * 100}>
-                <div className="flex flex-col items-center text-center">
-                  <div className="mb-4 p-4 rounded-full bg-gradient-to-br from-primary/20 to-primary/5" data-aos="zoom-in">
-                    <p.icon className="h-8 w-8 text-primary" />
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1, ease: "easeOut" }}
+              >
+                <Card className="p-6 h-full border-2 border-border">
+                  <div className="flex flex-col items-center text-center">
+                    <motion.div
+                      className="mb-4 p-4 rounded-full bg-gradient-to-br from-primary/20 to-primary/5"
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    >
+                      <p.icon className="h-8 w-8 text-primary" />
+                    </motion.div>
+                    <h3 className="font-heading text-lg font-bold text-foreground mb-2">
+                      {p.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {p.desc}
+                    </p>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">
-                    {p.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {p.desc}
-                  </p>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="relative py-16 bg-card" data-aos="fade-up">
+      <section className="relative py-16 bg-card">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3" data-aos="fade-up">FAQ</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">FAQ</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Les réponses aux questions les plus courantes.
             </p>
-          </div>
-          <div className="max-w-4xl mx-auto glass-card p-6 sm:p-8 rounded-2xl border-2 border-border" data-aos="fade-up" data-aos-delay="200">
+          </motion.div>
+          <motion.div
+            className="max-w-4xl mx-auto glass-card p-6 sm:p-8 rounded-2xl border-2 border-border"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             <Accordion type="single" collapsible className="space-y-4">
               {faqItems.map((item, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-border/50 last:border-0 pb-4 last:pb-0" data-aos="fade-up" data-aos-delay={100 + idx * 60}>
+                <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-border/50 last:border-0 pb-4 last:pb-0">
                   <AccordionTrigger className="font-heading text-base md:text-lg text-foreground text-left">
                     {item.q}
                   </AccordionTrigger>
@@ -337,53 +448,85 @@ export default function ServicesMobile() {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Tarifs indicatifs */}
-      <section className="relative py-16 bg-gradient-to-b from-background via-accent/5 to-background" data-aos="fade-up">
+      <section className="relative py-16 bg-gradient-to-b from-background via-accent/5 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3" data-aos="fade-up">Tarifs indicatifs</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Tarifs indicatifs</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Transparents et ajustables selon le périmètre de ton projet.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             {tarifs.map((t, idx) => (
-              <Card key={idx} className={`p-8 h-full relative overflow-hidden border-2 ${t.featured ? 'border-primary/50 bg-gradient-to-br from-primary/5 to-transparent' : 'border-border'}`} data-aos="fade-up" data-aos-delay={100 + idx * 100}>
-                {t.featured && (
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                    Recommandé
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + idx * 0.1, ease: "easeOut" }}
+              >
+                <Card className={`p-8 h-full relative overflow-hidden border-2 ${t.featured ? 'border-primary/50 bg-gradient-to-br from-primary/5 to-transparent' : 'border-border'}`}>
+                  {t.featured && (
+                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                      Recommandé
+                    </div>
+                  )}
+                  <div className={`relative z-10 ${t.featured ? 'text-center max-w-3xl mx-auto' : ''}`}>
+                    <h3 className={`font-heading ${t.featured ? 'text-2xl' : 'text-xl'} font-bold text-foreground mb-3`}>
+                      {t.title}
+                    </h3>
+                    <p className={`${t.featured ? 'text-lg' : ''} text-muted-foreground leading-relaxed`}>
+                      {t.desc}
+                    </p>
                   </div>
-                )}
-                <div className={`relative z-10 ${t.featured ? 'text-center max-w-3xl mx-auto' : ''}`}>
-                  <h3 className={`font-heading ${t.featured ? 'text-2xl' : 'text-xl'} font-bold text-foreground mb-3`}>
-                    {t.title}
-                  </h3>
-                  <p className={`${t.featured ? 'text-lg' : ''} text-muted-foreground leading-relaxed`}>
-                    {t.desc}
-                  </p>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="relative py-20 bg-gradient-to-br from-primary/10 via-background to-accent/5" data-aos="fade-up">
+      <section className="relative py-20 bg-gradient-to-br from-primary/10 via-background to-accent/5">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto" data-aos="fade-up">
-            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4" data-aos="fade-up">
+          <motion.div
+            className="text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
               Prêt à démarrer votre projet ?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto px-4">
               Découvrez nos réalisations, lancez-vous ou apprenez-en plus sur notre approche collaborative.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4" data-aos="fade-up" data-aos-delay="200">
+            <motion.div
+              className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 text-base group border-2">
                 <Link to="/portfolio" onClick={scrollTop} className="flex items-center gap-2">
                   Voir des exemples
@@ -402,8 +545,8 @@ export default function ServicesMobile() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>

@@ -269,6 +269,15 @@
     transform: translate(calc(100cqw - 100%), 0);
   }
 }
+
+/* Fallback for browsers without container units support (mobile Safari/older Chrome) */
+@supports not (width: 1cqw) {
+  @keyframes shimmer-slide {
+    to {
+      transform: translate(calc(100vw - 100%), 0);
+    }
+  }
+}
 @keyframes spin-around {
   0% {
     transform: translateZ(0) rotate(0);

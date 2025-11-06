@@ -26,28 +26,35 @@ import {
 
 export default function Services() {
   const isMobile = useIsMobile(768);
+  const shouldAnimate = !isMobile;
 
   // Animation variants pour le fade-in
-  const fadeInUp = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.7, ease: easeOut }
-  };
+  const fadeInUp = shouldAnimate
+    ? {
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-100px" },
+        transition: { duration: 0.7, ease: easeOut },
+      }
+    : {};
 
-  const fadeIn = {
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.8, ease: easeOut }
-  };
+  const fadeIn = shouldAnimate
+    ? {
+        initial: { opacity: 0 },
+        whileInView: { opacity: 1 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.8, ease: easeOut },
+      }
+    : {};
 
-  const staggerContainer = {
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { staggerChildren: 0.1 }
-  };
+  const staggerContainer = shouldAnimate
+    ? {
+        initial: { opacity: 0 },
+        whileInView: { opacity: 1 },
+        viewport: { once: true, margin: "-100px" },
+        transition: { staggerChildren: 0.1 },
+      }
+    : {};
 
   return (
     <div className="min-h-screen pt-20">
@@ -62,16 +69,8 @@ export default function Services() {
               top: "-10%",
               left: "10%",
             }}
-            animate={{
-              x: [0, 100, 0],
-              y: [0, 80, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: easeInOut,
-            }}
+            animate={shouldAnimate ? { x: [0, 100, 0], y: [0, 80, 0], scale: [1, 1.1, 1] } : undefined}
+            transition={shouldAnimate ? { duration: 20, repeat: Infinity, ease: easeInOut } : undefined}
           />
           <motion.div
             className="absolute w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
@@ -80,16 +79,8 @@ export default function Services() {
               bottom: "-5%",
               right: "15%",
             }}
-            animate={{
-              x: [0, -120, 0],
-              y: [0, -100, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: easeInOut,
-            }}
+            animate={shouldAnimate ? { x: [0, -120, 0], y: [0, -100, 0], scale: [1, 1.2, 1] } : undefined}
+            transition={shouldAnimate ? { duration: 25, repeat: Infinity, ease: easeInOut } : undefined}
           />
           <motion.div
             className="absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-25"
@@ -98,16 +89,8 @@ export default function Services() {
               top: "40%",
               right: "5%",
             }}
-            animate={{
-              x: [0, 60, 0],
-              y: [0, -60, 0],
-              scale: [1, 0.9, 1],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: easeInOut,
-            }}
+            animate={shouldAnimate ? { x: [0, 60, 0], y: [0, -60, 0], scale: [1, 0.9, 1] } : undefined}
+            transition={shouldAnimate ? { duration: 18, repeat: Infinity, ease: easeInOut } : undefined}
           />
         </div>
 
@@ -116,15 +99,15 @@ export default function Services() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: easeOut }}
+            initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+            animate={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+            transition={shouldAnimate ? { duration: 0.8, ease: easeOut } : undefined}
             className="text-center max-w-4xl mx-auto"
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              initial={shouldAnimate ? { opacity: 0, scale: 0.9 } : undefined}
+              animate={shouldAnimate ? { opacity: 1, scale: 1 } : undefined}
+              transition={shouldAnimate ? { delay: 0.2, duration: 0.6 } : undefined}
               className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
             >
               <span className="text-sm font-medium text-primary">Votre partenaire digital</span>
@@ -135,9 +118,9 @@ export default function Services() {
                 <span className="relative z-10">Services</span>
                 <motion.span
                   className="absolute bottom-2 left-0 right-0 h-3 bg-primary/20 -rotate-1"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
+                  initial={shouldAnimate ? { scaleX: 0 } : undefined}
+                  animate={shouldAnimate ? { scaleX: 1 } : undefined}
+                  transition={shouldAnimate ? { delay: 0.5, duration: 0.8 } : undefined}
                 />
               </span>
             </h1>
@@ -147,9 +130,9 @@ export default function Services() {
             </p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              initial={shouldAnimate ? { opacity: 0, y: 20 } : undefined}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+              transition={shouldAnimate ? { delay: 0.6, duration: 0.6 } : undefined}
               className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4"
             >
               {[
@@ -159,9 +142,9 @@ export default function Services() {
               ].map((t, idx) => (
                 <motion.span
                   key={t}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.7 + idx * 0.1, duration: 0.5 }}
+                  initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : undefined}
+                  animate={shouldAnimate ? { opacity: 1, scale: 1 } : undefined}
+                  transition={shouldAnimate ? { delay: 0.7 + idx * 0.1, duration: 0.5 } : undefined}
                   className="px-5 py-2 text-sm font-medium rounded-full glass-card hover:bg-primary/10 transition-all duration-300 cursor-default hover:scale-105"
                 >
                   {t}
@@ -275,11 +258,11 @@ export default function Services() {
             ].map((s, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.15, duration: 0.6, ease: easeOut }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+                whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+                viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+                transition={shouldAnimate ? { delay: idx * 0.15, duration: 0.6, ease: easeOut } : undefined}
+                whileHover={shouldAnimate ? { y: -8, transition: { duration: 0.2 } } : undefined}
                 className="group"
               >
                 <Card className="p-8 h-full glass-card-hover relative overflow-hidden border-2 border-border hover:border-primary/50">
@@ -298,10 +281,10 @@ export default function Services() {
                       {s.bullets.map((b, i) => (
                         <motion.li
                           key={i}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.1 + i * 0.05 }}
+                          initial={shouldAnimate ? { opacity: 0, x: -10 } : undefined}
+                          whileInView={shouldAnimate ? { opacity: 1, x: 0 } : undefined}
+                          viewport={shouldAnimate ? { once: true } : undefined}
+                          transition={shouldAnimate ? { delay: idx * 0.1 + i * 0.05 } : undefined}
                           className="flex items-start gap-3"
                         >
                           <span className="mt-1.5 inline-block w-2 h-2 rounded-full bg-primary group-hover:scale-125 transition-transform duration-300" />
@@ -344,11 +327,11 @@ export default function Services() {
             ].map((c, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.15, duration: 0.6, ease: easeOut }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+                whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+                viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+                transition={shouldAnimate ? { delay: idx * 0.15, duration: 0.6, ease: easeOut } : undefined}
+                whileHover={shouldAnimate ? { y: -6, transition: { duration: 0.2 } } : undefined}
                 className="group"
               >
                 <Card className="p-8 h-full glass-card-hover border-2 border-border hover:border-primary/40 relative overflow-hidden">
@@ -417,8 +400,8 @@ export default function Services() {
                 <Card className="p-6 h-full glass-card hover:shadow-lg transition-all duration-300 border-2 border-border group-hover:border-primary/30">
                   <div className="flex flex-col items-center text-center">
                     <motion.div
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
+                      whileHover={shouldAnimate ? { rotate: 360, scale: 1.1 } : undefined}
+                      transition={shouldAnimate ? { duration: 0.6 } : undefined}
                       className="mb-4 p-4 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 group-hover:from-primary group-hover:to-primary/80 transition-all duration-300"
                     >
                       <p.icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
@@ -510,10 +493,10 @@ export default function Services() {
               ].map((item, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-20px" }}
-                  transition={{ delay: idx * 0.08, duration: 0.5, ease: easeOut }}
+                  initial={shouldAnimate ? { opacity: 0, x: -30 } : undefined}
+                  whileInView={shouldAnimate ? { opacity: 1, x: 0 } : undefined}
+                  viewport={shouldAnimate ? { once: true, margin: "-20px" } : undefined}
+                  transition={shouldAnimate ? { delay: idx * 0.08, duration: 0.5, ease: easeOut } : undefined}
                 >
                   <AccordionItem
                     value={`item-${idx}`}
@@ -562,11 +545,11 @@ export default function Services() {
             ].map((t, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.12, duration: 0.6, ease: easeOut }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+                whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+                viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+                transition={shouldAnimate ? { delay: idx * 0.12, duration: 0.6, ease: easeOut } : undefined}
+                whileHover={shouldAnimate ? { y: -4, transition: { duration: 0.2 } } : undefined}
                 className={`group ${t.featured ? 'lg:col-span-3' : ''}`}
               >
                 <Card className={`p-8 h-full glass-card-hover relative overflow-hidden ${
@@ -608,37 +591,37 @@ export default function Services() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: easeOut }}
+            initial={shouldAnimate ? { opacity: 0, y: 40 } : undefined}
+            whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+            viewport={shouldAnimate ? { once: true, margin: "-100px" } : undefined}
+            transition={shouldAnimate ? { duration: 0.8, ease: easeOut } : undefined}
             className="text-center max-w-4xl mx-auto"
           >
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, ease: easeOut }}
+              initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+              whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+              viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+              transition={shouldAnimate ? { duration: 0.7, ease: easeOut } : undefined}
               className="font-heading text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6"
             >
               Prêt à démarrer votre projet ?
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: 0.15, duration: 0.7, ease: easeOut }}
+              initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+              whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+              viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+              transition={shouldAnimate ? { delay: 0.15, duration: 0.7, ease: easeOut } : undefined}
               className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 sm:mb-12 max-w-2xl mx-auto px-4"
             >
               Découvrez nos réalisations, lancez-vous ou apprenez-en plus sur notre approche collaborative.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: 0.3, duration: 0.7, ease: easeOut }}
+              initial={shouldAnimate ? { opacity: 0, y: 30 } : undefined}
+              whileInView={shouldAnimate ? { opacity: 1, y: 0 } : undefined}
+              viewport={shouldAnimate ? { once: true, margin: "-50px" } : undefined}
+              transition={shouldAnimate ? { delay: 0.3, duration: 0.7, ease: easeOut } : undefined}
               className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
             >
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base group border-2 hover:border-primary/50">

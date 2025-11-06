@@ -156,31 +156,41 @@ export default function Home() {
             <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground">technologies maitrisées</h3>
           </div>
         </div>
-        {(() => {
-          const techLogos = [
-            { node: <SiReact />, title: "React", href: "https://react.dev" },
-            { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-            { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-            { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-          ]
-          return (
-            <div className="relative h-24 md:h-28 w-full overflow-hidden">
-              <LogoLoop
-                logos={techLogos}
-                speed={60}
-                direction="left"
-                logoHeight={48}
-                gap={40}
-                pauseOnHover
-                scaleOnHover
-                fadeOut
-                fadeOutColor="var(--background)"
-                width="100%"
-                ariaLabel="Logo des technologies"
-              />
-            </div>
-          )
-        })()}
+        {/* Désactiver LogoLoop sur mobile pour éviter tout blocage potentiel */}
+        {isMobile ? (
+          <div className="flex items-center justify-center gap-8 h-24">
+            <SiReact className="text-foreground" size={36} />
+            <SiNextdotjs className="text-foreground" size={36} />
+            <SiTypescript className="text-foreground" size={36} />
+            <SiTailwindcss className="text-foreground" size={36} />
+          </div>
+        ) : (
+          (() => {
+            const techLogos = [
+              { node: <SiReact />, title: "React", href: "https://react.dev" },
+              { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+              { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+              { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+            ]
+            return (
+              <div className="relative h-24 md:h-28 w-full overflow-hidden">
+                <LogoLoop
+                  logos={techLogos}
+                  speed={60}
+                  direction="left"
+                  logoHeight={48}
+                  gap={40}
+                  pauseOnHover
+                  scaleOnHover
+                  fadeOut
+                  fadeOutColor="var(--background)"
+                  width="100%"
+                  ariaLabel="Logo des technologies"
+                />
+              </div>
+            )
+          })()
+        )}
       </section>
 
       {/* Services Section */}
@@ -220,18 +230,12 @@ export default function Home() {
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            {...getScrollAnimation(isMobile, { delay: 0 })}
             className="max-w-3xl mx-auto"
           >
             {/* Carte principale */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              {...getScrollAnimation(isMobile, { delay: 0.2 })}
               className="relative group"
             >
               {/* Glow effect subtil */}
@@ -240,10 +244,7 @@ export default function Home() {
               <div className="relative bg-card/90 backdrop-blur-xl border border-border/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl text-center">
                 {/* Icône en haut */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.3 })}
                   className="flex justify-center mb-8"
                 >
                   <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-primary/30 shadow-lg flex items-center justify-center backdrop-blur-sm">
@@ -253,10 +254,7 @@ export default function Home() {
 
                 {/* Titre avec gradient */}
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.4 })}
                   className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
                 >
                   Prototype <span className="text-primary font-bold">Gratuit</span>
@@ -264,10 +262,7 @@ export default function Home() {
 
                 {/* Description */}
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.5 })}
                   className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2"
                 >
                   Nous réalisons <span className="font-semibold text-primary">gratuitement</span> un prototype de votre site web une fois que vous nous contactez pour une demande. Visualisez votre projet avant de vous engager !
@@ -275,10 +270,7 @@ export default function Home() {
 
                 {/* Liste des bénéfices en 2 colonnes */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.6 })}
                   className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 max-w-xl mx-auto"
                 >
                   {[
@@ -289,10 +281,7 @@ export default function Home() {
                   ].map((item, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.7 + idx * 0.1, duration: 0.4 }}
+                      {...getScrollAnimation(isMobile, { delay: 0.7 + idx * 0.1 })}
                       className="flex items-center gap-3 text-left"
                     >
                       <CheckCircle className="text-primary flex-shrink-0" size={20} />
@@ -303,10 +292,7 @@ export default function Home() {
 
                 {/* CTA Button */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.8 })}
                   className="mb-6 flex justify-center"
                 >
                   <Link
@@ -327,10 +313,7 @@ export default function Home() {
 
                 {/* Note en bas */}
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.9, duration: 0.5 }}
+                  {...getScrollAnimation(isMobile, { delay: 0.9 })}
                   className="text-xs text-muted-foreground/80"
                 >
                   * Prototype réalisé après étude de votre demande et validation du projet
@@ -345,9 +328,7 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...getScrollAnimation(isMobile, { delay: 0 })}
             className="text-center max-w-4xl mx-auto"
           >
             <div className="mb-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">

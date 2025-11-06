@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { getScrollAnimation } from "@/utils/animations";
 
 interface ServiceCardProps {
   icon: LucideIcon;
@@ -11,12 +13,10 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({ icon: Icon, title, description, features, index }: ServiceCardProps) => {
+  const isMobile = useIsMobile(768);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      {...getScrollAnimation(isMobile, { delay: index * 0.1 })}
     >
       <Card className="glass-card glass-card-hover p-8 h-full">
         <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">

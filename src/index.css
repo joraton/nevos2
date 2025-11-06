@@ -48,6 +48,44 @@ All colors MUST be HSL.
     --shadow-color: rgba(29,161,242,0.15);
   }
 
+  /* Fallback HSL palette for browsers without OKLCH support (older mobile browsers) */
+  @supports not (color: oklch(0% 0 0)) {
+    :root {
+      --background: hsl(0 0% 100%);
+      --foreground: hsl(235 16% 16%);
+      --card: hsl(0 0% 98%);
+      --card-foreground: hsl(235 16% 16%);
+      --popover: hsl(0 0% 100%);
+      --popover-foreground: hsl(235 16% 16%);
+      --primary: hsl(245 85% 60%);
+      --primary-foreground: hsl(0 0% 100%);
+      --secondary: hsl(235 16% 16%);
+      --secondary-foreground: hsl(0 0% 100%);
+      --muted: hsl(240 10% 94%);
+      --muted-foreground: hsl(235 16% 16%);
+      --accent: hsl(240 15% 96%);
+      --accent-foreground: hsl(245 85% 60%);
+      --destructive: hsl(12 85% 55%);
+      --destructive-foreground: hsl(0 0% 100%);
+      --border: hsl(225 20% 92%);
+      --input: hsl(225 20% 96%);
+      --ring: hsl(245 85% 55%);
+      --chart-1: hsl(245 85% 60%);
+      --chart-2: hsl(160 55% 60%);
+      --chart-3: hsl(83 60% 65%);
+      --chart-4: hsl(152 55% 60%);
+      --chart-5: hsl(12 85% 50%);
+      --sidebar: hsl(0 0% 98%);
+      --sidebar-foreground: hsl(235 16% 16%);
+      --sidebar-primary: hsl(245 85% 60%);
+      --sidebar-primary-foreground: hsl(0 0% 100%);
+      --sidebar-accent: hsl(240 15% 96%);
+      --sidebar-accent-foreground: hsl(245 85% 60%);
+      --sidebar-border: hsl(230 20% 90%);
+      --sidebar-ring: hsl(245 85% 55%);
+    }
+  }
+
   .dark {
     --background: oklch(0 0 0);
     --foreground: oklch(0.9328 0.0025 228.7857);
@@ -86,6 +124,38 @@ All colors MUST be HSL.
     --font-mono: Menlo, monospace;
     --radius: 1.3rem;
     --shadow-color: rgba(29,161,242,0.25);
+  }
+
+  @supports not (color: oklch(0% 0 0)) {
+    .dark {
+      --background: hsl(0 0% 0%);
+      --foreground: hsl(0 0% 95%);
+      --card: hsl(240 9% 20%);
+      --card-foreground: hsl(0 0% 95%);
+      --popover: hsl(0 0% 0%);
+      --popover-foreground: hsl(0 0% 95%);
+      --primary: hsl(245 85% 60%);
+      --primary-foreground: hsl(0 0% 100%);
+      --secondary: hsl(218 5% 94%);
+      --secondary-foreground: hsl(235 16% 16%);
+      --muted: hsl(240 6% 12%);
+      --muted-foreground: hsl(230 6% 65%);
+      --accent: hsl(240 20% 18%);
+      --accent-foreground: hsl(245 85% 60%);
+      --destructive: hsl(12 85% 55%);
+      --destructive-foreground: hsl(0 0% 100%);
+      --border: hsl(240 6% 30%);
+      --input: hsl(240 10% 25%);
+      --ring: hsl(245 85% 55%);
+      --sidebar: hsl(240 9% 20%);
+      --sidebar-foreground: hsl(0 0% 95%);
+      --sidebar-primary: hsl(245 85% 55%);
+      --sidebar-primary-foreground: hsl(0 0% 100%);
+      --sidebar-accent: hsl(240 20% 18%);
+      --sidebar-accent-foreground: hsl(245 85% 60%);
+      --sidebar-border: hsl(240 10% 45%);
+      --sidebar-ring: hsl(245 85% 55%);
+    }
   }
 }
 

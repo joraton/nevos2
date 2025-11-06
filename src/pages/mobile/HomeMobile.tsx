@@ -4,6 +4,8 @@ import { unzipSync } from "fflate";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Button } from "@/components/ui/button";
+import LogoLoop from "@/components/LogoLoop";
+import ShimmerButton from "@/components/ui/shimmer-button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
@@ -117,15 +119,21 @@ export default function HomeMobile() {
               <div ref={heroAnimRef} style={{ width: "100%", height: "100%" }} />
             </div>
             <h1 className="font-heading text-4xl font-bold text-foreground mb-4 leading-tight" data-aos="fade-up">
-              Montrez vos compétences au monde
+              Montrez vos <span className="animated-gradient-text">compétences</span> au monde
             </h1>
             <p className="text-lg text-foreground/80 mb-8" data-aos="fade-up" data-aos-delay="100">
               Restaurant, artisan, commerçant ? Nous concevons des sites web professionnels pour attirer plus de clients, valoriser votre savoir-faire et développer votre activité locale.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center" data-aos="fade-up" data-aos-delay="200">
-              <Button asChild size="lg" className="text-base px-6 py-4">
-                <Link to="/contact">Commencer maintenant →</Link>
-              </Button>
+              <Link to="/contact" className="w-full sm:w-auto">
+                <ShimmerButton
+                  className="text-base px-6 py-4 w-full sm:w-auto"
+                  background="oklch(0.2097 0.008 274.5332)"
+                  shimmerColor="#ffffff"
+                >
+                  Commencer maintenant →
+                </ShimmerButton>
+              </Link>
               <Button asChild size="lg" variant="outline" className="text-base px-6 py-4">
                 <Link to="/portfolio">Découvrir nos projets</Link>
               </Button>
@@ -134,18 +142,37 @@ export default function HomeMobile() {
         </div>
       </section>
 
-      {/* Technologies (statique) */}
+      {/* Technologies (LogoLoop animé, comme desktop) */}
       <section className="py-10 bg-background" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
-            <h3 className="font-heading text-xl font-bold text-foreground" data-aos="fade-up">technologies maitrisées</h3>
+            <h3 className="font-heading text-xl font-bold text-foreground" data-aos="fade-up">technologies maîtrisées</h3>
           </div>
-          <div className="flex items-center justify-center gap-8 h-24" data-aos="fade-up" data-aos-delay="100">
-            <SiReact className="text-foreground" size={36} />
-            <SiNextdotjs className="text-foreground" size={36} />
-            <SiTypescript className="text-foreground" size={36} />
-            <SiTailwindcss className="text-foreground" size={36} />
-          </div>
+          {(() => {
+            const techLogos = [
+              { node: <SiReact />, title: "React", href: "https://react.dev" },
+              { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+              { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+              { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+            ];
+            return (
+              <div className="relative h-24 w-full overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
+                <LogoLoop
+                  logos={techLogos}
+                  speed={60}
+                  direction="left"
+                  logoHeight={36}
+                  gap={40}
+                  pauseOnHover
+                  scaleOnHover
+                  fadeOut
+                  fadeOutColor="var(--background)"
+                  width="100%"
+                  ariaLabel="Logo des technologies"
+                />
+              </div>
+            );
+          })()}
         </div>
       </section>
 
@@ -203,9 +230,16 @@ export default function HomeMobile() {
               ))}
             </div>
             <div className="mb-6 flex justify-center" data-aos="fade-up" data-aos-delay="300">
-              <Button asChild size="lg" className="text-base px-8 py-4">
-                <Link to="/contact">Demander mon prototype gratuit →</Link>
-              </Button>
+              <Link to="/contact" className="block w-full sm:w-auto">
+                <ShimmerButton
+                  className="text-base px-8 py-4 w-full sm:w-auto font-semibold"
+                  borderRadius="12px"
+                  background="oklch(0.2097 0.008 274.5332)"
+                  shimmerColor="#ffffff"
+                >
+                  Demander mon prototype gratuit →
+                </ShimmerButton>
+              </Link>
             </div>
             <p className="text-xs text-muted-foreground/80" data-aos="fade">
               * Prototype réalisé après étude de votre demande et validation du projet
@@ -235,9 +269,15 @@ export default function HomeMobile() {
               Rejoignez les entrepreneurs qui ont fait confiance à notre expertise pour <span className="font-semibold">propulser leur business en ligne</span>.
             </p>
             <div className="flex justify-center" data-aos="fade-up" data-aos-delay="200">
-              <Button asChild size="lg" className="text-base px-8 py-5">
-                <Link to="/contact">Démarrer mon projet</Link>
-              </Button>
+              <Link to="/contact" className="block w-full sm:w-auto">
+                <ShimmerButton
+                  className="text-base px-8 py-5 w-full sm:w-auto"
+                  background="oklch(0.2097 0.008 274.5332)"
+                  shimmerColor="#ffffff"
+                >
+                  Démarrer mon projet
+                </ShimmerButton>
+              </Link>
             </div>
           </div>
         </div>

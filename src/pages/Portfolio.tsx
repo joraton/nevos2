@@ -22,7 +22,7 @@ const allProjects = [
     title: "Restaurant Japonais",
     category: "Restaurant", 
     description: "Restaurant japonais avec carte multilingue et commande en ligne.",
-    link: "https://preview--yuji-template.lovable.app/",
+    link: "https://restau-jap-65yo.vercel.app/",
     badge: "Projet #2",
     image: "/asset/Template jap.png"
   },
@@ -30,7 +30,7 @@ const allProjects = [
     title: "Bistrot Traditionnel",
     category: "Restaurant",
     description: "Bistrot traditionnel avec présentation élégante et galerie photo.",
-    link: "https://brasserie-honore-accueil.lovable.app/",
+    link: "https://brasserie-jean.vercel.app/",
     badge: "Projet #3",
     image: "/asset/Template brasserie.png"
   },
@@ -38,7 +38,7 @@ const allProjects = [
     title: "Restaurant Italien",
     category: "Restaurant",
     description: "Restaurant italien avec menu de pizzas, pâtes et réservation en ligne.",
-    link: "https://preview--pizzeria-mama.lovable.app/",
+    link: "https://restaurant-italien-iota.vercel.app/",
     badge: "Projet #4",
     image: "/asset/Template italien.png"
   },

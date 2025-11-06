@@ -42,17 +42,17 @@ Parfait ! Voici le contenu complet de la page Templates avec tous les liens :
 
 #### **2. Template de restaurant japonais**
 - **Description :** "Restaurant japonais avec carte multilingue et commande en ligne."
-- **Lien :** https://preview--yuji-template.lovable.app/
+- **Lien :** https://restau-jap-65yo.vercel.app/
 - **Badge :** "Projet #2"
 
 #### **3. Template de bistrot**
 - **Description :** "Bistrot traditionnel avec présentation élégante et galerie photo."
-- **Lien :** https://brasserie-honore-accueil.lovable.app/
+- **Lien :** https://brasserie-jean.vercel.app/
 - **Badge :** "Projet #3"
 
 #### **4. Template de restaurant italien**
 - **Description :** "Restaurant italien avec menu de pizzas, pâtes et réservation en ligne."
-- **Lien :** https://preview--pizzeria-mama.lovable.app/
+- **Lien :** https://restaurant-italien-iota.vercel.app/
 - **Badge :** "Projet #4"
 
 #### **5. Template de boulangerie**
@@ -75,9 +75,9 @@ Parfait ! Voici le contenu complet de la page Templates avec tous les liens :
 ## 🔗 Récapitulatif des liens directs :
 
 1. **Café :** https://preview--gourmand-cafe-web.lovable.app/
-2. **Restaurant japonais :** https://preview--yuji-template.lovable.app/
-3. **Bistrot :** https://brasserie-honore-accueil.lovable.app/
-4. **Restaurant italien :** https://preview--pizzeria-mama.lovable.app/
+-2. **Restaurant japonais :** https://restau-jap-65yo.vercel.app/
+-3. **Bistrot :** https://brasserie-jean.vercel.app/
+-4. **Restaurant italien :** https://restaurant-italien-iota.vercel.app/
 5. **Boulangerie :** https://preview--boulangerie-template.lovable.app/
 6. **Boucherie :** https://preview--viande-et-co-boutique.lovable.app/
 7. **Cabinet comptable :** https://comptapro.lovable.app/cabinet

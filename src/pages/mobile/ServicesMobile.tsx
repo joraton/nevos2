@@ -69,7 +69,7 @@ export default function ServicesMobile() {
             const text = await res.clone().text();
             parsed = JSON.parse(text);
           } catch {
-            // Attendu: réponse binaire zip -> décompresser et extraire l'animation
+            // Attendu: réponse binaire zip -> décompresser et extraire l'animation + images
             const buf = await res.arrayBuffer();
             const files = unzipSync(new Uint8Array(buf));
             const decoder = new TextDecoder("utf-8");
@@ -100,7 +100,46 @@ export default function ServicesMobile() {
             }
 
             if (!jsonStr) throw new Error("Aucune animation JSON trouvée dans le .lottie");
+
+            // Parse de l'animation
             parsed = JSON.parse(jsonStr);
+
+            // Intégrer les images référencées par lottie en data:URI pour éviter les placeholders
+            const toBase64 = (u8: Uint8Array) => {
+              let binary = "";
+              const chunk = 0x8000;
+              for (let i = 0; i < u8.length; i += chunk) {
+                binary += String.fromCharCode(...u8.subarray(i, i + chunk));
+              }
+              return btoa(binary);
+            };
+
+            if (parsed && Array.isArray(parsed.assets)) {
+              parsed.assets.forEach((asset: any) => {
+                if (!asset || typeof asset.p !== "string") return;
+                const candidates = [
+                  `${asset.u || ""}${asset.p}`,
+                  asset.p,
+                  `images/${asset.p}`,
+                  `assets/${asset.p}`,
+                ];
+                const key = candidates.find((k) => k in files);
+                if (!key) return;
+                const bufImg = files[key];
+                const name = key.toLowerCase();
+                const mime = name.endsWith(".png")
+                  ? "image/png"
+                  : name.endsWith(".jpg") || name.endsWith(".jpeg")
+                  ? "image/jpeg"
+                  : name.endsWith(".svg")
+                  ? "image/svg+xml"
+                  : "application/octet-stream";
+                const base64 = toBase64(bufImg);
+                asset.p = `data:${mime};base64,${base64}`;
+                asset.u = "";
+                asset.e = 1;
+              });
+            }
           }
           data = parsed;
         }

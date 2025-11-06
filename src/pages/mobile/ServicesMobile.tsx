@@ -616,11 +616,6 @@ export default function ServicesMobile() {
                 transition={{ duration: 0.5, delay: 0.1 + idx * 0.1, ease: "easeOut" }}
               >
                 <Card className={`p-8 h-full relative overflow-hidden border-2 ${t.featured ? 'border-primary/50 bg-gradient-to-br from-primary/5 to-transparent' : 'border-border'}`}>
-                  {t.featured && (
-                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                      Recommandé
-                    </div>
-                  )}
                   <div className={`relative z-10 ${t.featured ? 'text-center max-w-3xl mx-auto' : ''}`}>
                     <h3 className={`font-heading ${t.featured ? 'text-2xl' : 'text-xl'} font-bold text-foreground mb-3`}>
                       {t.title}

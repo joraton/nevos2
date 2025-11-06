@@ -46,25 +46,63 @@ export default function ServicesMobile() {
     const loadLottie = async () => {
       try {
         let data: any | null = null;
-        // Tenter un JSON compagnon si présent (non obligatoire)
-        const jsonRes = await fetch("/asset/Site%20Stats%20and%20Data.json");
-        if (jsonRes.ok) {
-          data = await jsonRes.json();
-        } else {
-          // Fallback: charger le .lottie
-          const res = await fetch("/asset/Site%20Stats%20and%20Data.lottie");
+        // 1) Essayer un JSON compagnon si présent et valide (content-type)
+        try {
+          const jsonRes = await fetch("/asset/Site%20Stats%20and%20Data.json", { cache: "no-store" });
+          if (jsonRes.ok) {
+            const ct = (jsonRes.headers.get("content-type") || "").toLowerCase();
+            if (ct.includes("application/json") || ct.includes("text/json")) {
+              data = await jsonRes.json();
+            }
+          }
+        } catch {
+          // Ignorer et passer au fallback .lottie
+        }
+
+        // 2) Fallback: charger le .lottie (zip) puis extraire l'animation JSON
+        if (!data) {
+          const res = await fetch("/asset/Site%20Stats%20and%20Data.lottie", { cache: "no-store" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          let parsed: any | null = null;
+          // Certains .lottie peuvent contenir du JSON direct (peu probable), tenter rapidement
           try {
             const text = await res.clone().text();
-            data = JSON.parse(text);
+            parsed = JSON.parse(text);
           } catch {
+            // Attendu: réponse binaire zip -> décompresser et extraire l'animation
             const buf = await res.arrayBuffer();
             const files = unzipSync(new Uint8Array(buf));
-            const jsonEntry = Object.keys(files).find((p) => p.endsWith(".json"));
-            if (!jsonEntry) throw new Error("Aucun JSON trouvé dans le .lottie");
-            const jsonStr = new TextDecoder("utf-8").decode(files[jsonEntry]);
-            data = JSON.parse(jsonStr);
+            const decoder = new TextDecoder("utf-8");
+
+            let jsonStr: string | null = null;
+            // Préférer manifest.json si disponible pour localiser l'animation
+            if (files["manifest.json"]) {
+              try {
+                const manifest = JSON.parse(decoder.decode(files["manifest.json"]));
+                const candidatePath =
+                  manifest?.animations?.[0]?.animationUrl ||
+                  manifest?.animations?.[0]?.json ||
+                  manifest?.animations?.[0]?.path || null;
+                if (candidatePath && files[candidatePath]) {
+                  jsonStr = decoder.decode(files[candidatePath]);
+                } else {
+                  const alt = Object.keys(files).find((p) => p.startsWith("animations/") && p.endsWith(".json"));
+                  if (alt) jsonStr = decoder.decode(files[alt]);
+                }
+              } catch {
+                // Si manifest invalide, tenter le premier JSON non-manifest
+              }
+            }
+
+            if (!jsonStr) {
+              const anyJson = Object.keys(files).find((p) => p.endsWith(".json") && p !== "manifest.json");
+              if (anyJson) jsonStr = decoder.decode(files[anyJson]);
+            }
+
+            if (!jsonStr) throw new Error("Aucune animation JSON trouvée dans le .lottie");
+            parsed = JSON.parse(jsonStr);
           }
+          data = parsed;
         }
         if (heroAnimRef.current) {
           anim = lottie.loadAnimation({

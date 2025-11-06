@@ -323,15 +323,7 @@ export default function ServicesMobile() {
             >
               <div ref={heroAnimRef} style={{ width: "100%", height: "100%" }} />
             </motion.div>
-            <motion.div
-              className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <span className="text-sm font-medium text-primary">Votre partenaire digital</span>
-            </motion.div>
+            {/* Badge retiré sur mobile */}
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-4">Nos Services</h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Sites élégants, faciles à maintenir, pensés pour convertir — de l'idée au lancement, avec accompagnement continu.

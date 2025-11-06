@@ -108,6 +108,11 @@ export default function ServicesMobile() {
           anim = lottie.loadAnimation({
             container: heroAnimRef.current,
             renderer: "svg",
+            rendererSettings: {
+              preserveAspectRatio: "xMidYMid meet",
+              progressiveLoad: true,
+              hideOnTransparent: true,
+            },
             loop: true,
             autoplay: true,
             animationData: data,
@@ -271,7 +276,7 @@ export default function ServicesMobile() {
           >
             {/* Lottie hero pour Services (mobile) */}
             <motion.div
-              className="mx-auto mb-6 w-56 h-56"
+              className="mx-auto mb-6 w-64 h-64 sm:w-72 sm:h-72"
               initial={{ opacity: 0, y: 16, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
